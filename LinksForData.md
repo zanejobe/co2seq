@@ -1,25 +1,29 @@
 
 # base data
-Natural Earth I with Shaded Relief https://www.naturalearthdata.com/downloads/10m-raster-data/10m-natural-earth-1/
-cities, etc https://www.naturalearthdata.com/downloads/110m-cultural-vectors/
-coastline, rivers, etc. https://www.naturalearthdata.com/downloads/110m-physical-vectors/
-ocean https://www.naturalearthdata.com/downloads/10m-raster-data/10m-ocean-bottom/
-hi res ocean for GOM - https://www.boem.gov/oil-gas-energy/mapping-and-data/map-gallery/boem-northern-gulf-mexico-deepwater-bathymetry-grid-3d and https://gis.boem.gov/arcgis/rest/services/BOEM_BSEE/GOM_Deepwater_Bathymetry_Contours/MapServer
+- Natural Earth I with Shaded Relief https://www.naturalearthdata.com/downloads/10m-raster-data/10m-natural-earth-1/
+- cities, etc https://www.naturalearthdata.com/downloads/110m-cultural-vectors/
+- coastline, rivers, etc. https://www.naturalearthdata.com/downloads/110m-physical-vectors/
+- ocean https://www.naturalearthdata.com/downloads/10m-raster-data/10m-ocean-bottom/
+- hi res ocean for GOM - https://www.boem.gov/oil-gas-energy/mapping-and-data/map-gallery/boem-northern-gulf-mexico-deepwater-bathymetry-grid-3d and https://gis.boem.gov/arcgis/rest/services/BOEM_BSEE/GOM_Deepwater_Bathymetry_Contours/MapServer
 
 # oily data
-various hydrocarbon data https://www.eia.gov/maps/maps.htm 
-pipelines, oil offshore platforms, power plants etc https://www.eia.gov/maps/layer_info-m.php (maybe there is an API??)
-BSSE 
-NOTE - BSSE may have an API or be scrapable
-- fields https://www.data.bsee.gov/Main/FieldReserves.aspx#ascii 
-- more pipelines  https://www.data.bsee.gov/Main/Pipeline.aspx#ascii
-- more platform stuff https://www.data.bsee.gov/Main/Platform.aspx#ascii
-- wells https://www.data.bsee.gov/Main/Well.aspx#ascii
+- general https://www.osti.gov/dataexplorer/
+- various hydrocarbon data https://www.eia.gov/maps/maps.htm 
+- pipelines, oil offshore platforms, power plants etc https://www.eia.gov/maps/layer_info-m.php (maybe there is an API??)
+- BSSE 
+  - NOTE - BSSE may have an API or be scrapable
+  - fields https://www.data.bsee.gov/Main/FieldReserves.aspx#ascii 
+  - more pipelines  https://www.data.bsee.gov/Main/Pipeline.aspx#ascii
+  - more platform stuff https://www.data.bsee.gov/Main/Platform.aspx#ascii
+  - wells https://www.data.bsee.gov/Main/Well.aspx#ascii
+- GOM specific https://edx.netl.doe.gov/offshore/ 
 
 # CO2 data
 - https://www.netl.doe.gov/coal/carbon-storage/worldwide-ccs-database 
   - related https://edx.netl.doe.gov  
-  - GIS data too for this https://www.netl.doe.gov/sites/default/files/2018-10/ATLAS-V-2015.pdf  
+  - GIS data too for this https://www.netl.doe.gov/sites/default/files/2018-10/ATLAS-V-2015.pdf 
+  - and https://edx.netl.doe.gov/dataset/co2-screen 
+  - https://edx.netl.doe.gov/carbonstorage/ 
 - maybe stuff here too? https://sequestration.mit.edu/tools/projects/index.html  
   - And https://sequestration.mit.edu/tools/projects/index_database.html 
 - http://www.co2stored.co.uk/home/index 
@@ -30,6 +34,7 @@ NOTE - BSSE may have an API or be scrapable
 - where is the actual data from here? https://www.epa.gov/ghgemissions/inventory-us-greenhouse-gas-emissions-and-sinks
 - maybe some stuff here too? https://www.usgs.gov/faqs/how-much-carbon-dioxide-does-united-states-and-world-emit-each-year-energy-sources?qt-news_science_products=0#qt-news_science_products
 - database, and nice viz too https://ourworldindata.org/co2/country/united-states?country=~USA
+- https://edx.netl.doe.gov/carbonstorage/ lots of stuff here including https://edx.netl.doe.gov/geocube/#natcarbviewer
 
 # USGS
 https://co2public.er.usgs.gov/viewer/
