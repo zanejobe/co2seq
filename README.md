@@ -14,15 +14,6 @@ Also, Nice overviews of CCS
   - WEBSITE EXAMPLE atlas of economic complexity
 - figure out repo, front end language/webapp, back-end functions
 - basic dataset collection (and future-proofing with auto-updates through APIs)
-  - carbon sources and amounts
-  - EIA and BOEM production data
-  - US historical population dynamics
-  - energy usage (someone's 558 project?)
-  - google dataset search?
-  - https://edx.netl.doe.gov/carbonstorage/ and https://edx.netl.doe.gov
-    - e.g., https://edx.netl.doe.gov/dataset/co2-screen
-  - https://www.osti.gov/dataexplorer/
-  - https://edx.netl.doe.gov/offshore/
 
 ## Week 2 May 24-28
 - create web maps of CO2 sources and CCS basin locations
