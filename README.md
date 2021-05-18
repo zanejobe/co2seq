@@ -1,4 +1,11 @@
+# Intro
 what we aspire to https://atlas.cid.harvard.edu/explore
+
+Hmm, does this do what we want it to do? https://co2public.er.usgs.gov/viewer/
+
+Also, Nice overviews of CCS
+- https://www.netl.doe.gov/sites/default/files/netl-file/co2_eor_primer.pdf
+- http://energy.mit.edu/publication/lessons-learned-from-ccs-demonstration-and-large-pilot-projects/  
 
 # suggested schedule
 ## Week 1 May 17-21
