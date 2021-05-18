@@ -1,4 +1,7 @@
-# Week 1 May 17-21
+what we aspire to https://atlas.cid.harvard.edu/explore
+
+# suggested schedule
+## Week 1 May 17-21
 - Meet and greet May 17 (monday) with Zane and Brandon
   - discuss goals and end product
   - WEBSITE EXAMPLE atlas of economic complexity
@@ -14,7 +17,7 @@
   - https://www.osti.gov/dataexplorer/
   - https://edx.netl.doe.gov/offshore/
 
-# Week 2 May 24-28
+## Week 2 May 24-28
 - create web maps of CO2 sources and CCS basin locations
 - GOM focus
   - contact Khushboo!!
@@ -25,7 +28,7 @@
   - CO2 sources and pipeline data
   - analyze production history for potential high-graded sites
 
-# Week 3 May 31 – June4
+## Week 3 May 31 – June4
 - Permian focus
   - TXRRC data for CO2 injection for old fields
   - find literature about CO2 injection as EOR
@@ -33,9 +36,9 @@
   - New Mexico data?
   - core data - link to TTU, BEG, etc.
 
-# Week 4 June 7-11
+## Week 4 June 7-11
 - finish back-end tools and functions
 - build out web app and data-viz stuff
 
-# Week 5 June 14-18
+## Week 5 June 14-18
 comment code, clean up everything, build presentation, and deploy!
