@@ -19,6 +19,7 @@
 - GOM specific https://edx.netl.doe.gov/offshore/ 
 
 # CO2 data
+- so much stuff here https://edx.netl.doe.gov/dataset/?groups=carbon-storage-open-database
 - https://www.netl.doe.gov/coal/carbon-storage/worldwide-ccs-database 
   - related https://edx.netl.doe.gov  
   - GIS data too for this https://www.netl.doe.gov/sites/default/files/2018-10/ATLAS-V-2015.pdf 
