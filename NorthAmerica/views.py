@@ -5,6 +5,7 @@ import plotly.graph_objects as go
 from plotly.offline import plot
 import plotly.express as px
 import pandas as pd
+import geopandas as gpd
 
 '''https://medium.com/analytics-vidhya/plotly-for-geomaps-bb75d1de189f
 https://plotly.com/python/map-configuration/
@@ -30,14 +31,39 @@ def NorthAmericaView(request):
     fig.update_layout(height=300, margin={"r":0,"t":0,"l":0,"b":0})
     map_plot = plot({'data': fig}, output_type='div')'''
 
+    # add two dataframes
     us_cities = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/us-cities-top-1k.csv")
-    us_cities.head()
+    print(us_cities.head())
+    platforms = gpd.read_file("files/platform.zip")
 
-    fig = px.scatter_mapbox(us_cities, lat="lat", lon="lon", hover_name="City", hover_data=["State", "Population"],
+    platforms['lat'] = platforms['geometry'].y
+    platforms['lon'] = platforms['geometry'].x
+
+    print(platforms.head())
+
+    #build dictionary of df's
+    data_dict = {"cities": us_cities, "platforms": platforms}
+
+
+    fig = px.scatter_mapbox(data_dict['cities'], lat="lat", lon="lon",
                         color_discrete_sequence=["fuchsia"], zoom=3, height=300)
+    '''fig = px.scatter_mapbox(data_dict['platforms'], lat="lat", lon="lon",
+                        color_discrete_sequence=["fuchsia"], zoom=3, height=300)'''
     fig.update_layout(mapbox_style="open-street-map")
     fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 
     map_plot = plot({'data': fig}, output_type='div')
 
     return render(request, 'northAmericanMap.html', context={'map_plot': map_plot})
+
+
+'''us_cities = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/us-cities-top-1k.csv")
+#print(us_cities.head())
+platforms = gpd.read_file("files/platform.zip")
+
+temp_df = pd.DataFrame()
+
+temp_df['lat'] = platforms['geometry'].x
+temp_df['lon'] = platforms['geometry'].y
+
+print(temp_df)'''
