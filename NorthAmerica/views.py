@@ -36,19 +36,24 @@ def NorthAmericaView(request):
     print(us_cities.head())
     platforms = gpd.read_file("files/platform.zip")
 
-    platforms['lat'] = platforms['geometry'].y
-    platforms['lon'] = platforms['geometry'].x
+    temp = pd.DataFrame()
 
-    print(platforms.head())
+    temp['lon'] = platforms['geometry'].x
+    temp['lat'] = platforms['geometry'].y
+
+    platforms['lat'] = temp['lat']
+    platforms['lon'] = temp['lon']
 
     #build dictionary of df's
     data_dict = {"cities": us_cities, "platforms": platforms}
 
+    fig = go.Figure()
 
-    fig = px.scatter_mapbox(data_dict['cities'], lat="lat", lon="lon",
-                        color_discrete_sequence=["fuchsia"], zoom=3, height=300)
-    '''fig = px.scatter_mapbox(data_dict['platforms'], lat="lat", lon="lon",
-                        color_discrete_sequence=["fuchsia"], zoom=3, height=300)'''
+    fig.add_trace(go.Scattermapbox(lat=us_cities['lat'], lon=us_cities['lon']))
+
+    fig.add_trace(go.Scattermapbox(lat=platforms['lat'], lon=platforms['lon']))
+    
+    
     fig.update_layout(mapbox_style="open-street-map")
     fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 
@@ -57,13 +62,18 @@ def NorthAmericaView(request):
     return render(request, 'northAmericanMap.html', context={'map_plot': map_plot})
 
 
-'''us_cities = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/us-cities-top-1k.csv")
+us_cities = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/us-cities-top-1k.csv")
 #print(us_cities.head())
 platforms = gpd.read_file("files/platform.zip")
 
-temp_df = pd.DataFrame()
+temp = pd.DataFrame()
 
-temp_df['lat'] = platforms['geometry'].x
-temp_df['lon'] = platforms['geometry'].y
+temp['lon'] = platforms['geometry'].x
+temp['lat'] = platforms['geometry'].y
 
-print(temp_df)'''
+platforms['lat'] = temp['lat']
+platforms['lon'] = temp['lon']
+
+data_dict = {"cities": us_cities, "platforms": platforms}
+
+print(data_dict['platforms']['lon'])
