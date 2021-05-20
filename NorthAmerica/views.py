@@ -28,16 +28,38 @@ def NorthAmericaView(request):
     #build dictionary of df's
     data_dict = {"cities": us_cities, "platforms": platforms}
 
+    print(platforms.head())
+    print(us_cities.head())
+
     fig = go.Figure()
 
-    fig.add_trace(go.Scattermapbox(lat=us_cities['lat'], lon=us_cities['lon']))
+    fig.add_trace(go.Scattermapbox(lat=us_cities['lat'], lon=us_cities['lon'], 
+                    name='Cities', hoverinfo=us_cities['Cities']))
 
-    fig.add_trace(go.Scattermapbox(lat=platforms['lat'], lon=platforms['lon']))
+    fig.add_trace(go.Scattermapbox(lat=platforms['lat'], lon=platforms['lon'], 
+                    name='Oil Rigs'))
     
     
     fig.update_layout(mapbox_style="open-street-map")
     fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
     fig.update_mapboxes(center=go.layout.mapbox.Center(lat=40, lon=-99), zoom=3)
+
+    fig.update_layout(
+        legend=dict(
+            x=1,
+            y=1,
+            traceorder="reversed",
+            title_font_family="Times New Roman",
+            font=dict(
+                family="Courier",
+                size=20,
+                color="black"
+            ),
+            bgcolor="LightSteelBlue",
+            bordercolor="Black",
+            borderwidth=2
+        )
+    )
 
     map_plot = plot({'data': fig}, output_type='div')
 
