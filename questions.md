@@ -1,18 +1,19 @@
 # Questions About The Project
 1. What key features should be included on the map? So far we've come up with these for carbon sources:
-   - Pipelines
-   - Sands/plays/fields (what are the differences between these, should all be included?)
+   - Pipelines (transportation)
    - Powerplants
-   - Wells
-   - Platforms
+   
 
     And these for carbon storage:
+    - Sands/plays/fields (what are the differences between these, should all be included?)
     - Reservoirs
     - Unmineable coal
     - Saline formations
     - Basalt formations
     - Shale basins
     - Offshore storage (Is there a better/more specific term for this?)
+    - Wells
+    - Platforms
 
 Are we missing anything? Should some of these not be included?
 
