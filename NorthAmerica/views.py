@@ -37,6 +37,7 @@ def NorthAmericaView(request):
     
     fig.update_layout(mapbox_style="open-street-map")
     fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+    fig.update_mapboxes(center=go.layout.mapbox.Center(lat=40, lon=-99), zoom=3)
 
     map_plot = plot({'data': fig}, output_type='div')
 
