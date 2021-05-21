@@ -15,7 +15,7 @@ https://plotly.com/python/bubble-maps/#bubble-map-with-goscattergeo'''
 def NorthAmericaView(request):
     # add two dataframes
     us_cities = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/us-cities-top-1k.csv")
-    platforms = gpd.read_file("files/platform.zip")
+    platforms = gpd.read_file("Data/platforms/platform.zip")
 
     temp = pd.DataFrame()
 
@@ -34,7 +34,7 @@ def NorthAmericaView(request):
     fig = go.Figure()
 
     fig.add_trace(go.Scattermapbox(lat=us_cities['lat'], lon=us_cities['lon'], 
-                    name='Cities', hoverinfo=us_cities['Cities']))
+                    name='Cities'))
 
     fig.add_trace(go.Scattermapbox(lat=platforms['lat'], lon=platforms['lon'], 
                     name='Oil Rigs'))
