@@ -53,4 +53,7 @@ https://co2public.er.usgs.gov/viewer/
   - https://www.sciencedirect.com/science/article/pii/S1750583617305601 
   - https://aip.scitation.org/doi/abs/10.1063/1.4711198 
 - a CO2 simulator http://www.geosx.org 
+- Maps of CO2 sources and some other pipelines https://onlinelibrary.wiley.com/doi/epdf/10.1002/ghg.2082
+- 3D seismic outlines from NAMSS https://walrus.wr.usgs.gov/namss/
+- Derived products from their analysis https://www.betterenergy.org/wp-content/uploads/2020/06/GPI_RegionalCO2Whitepaper.pdf
  
