@@ -116,4 +116,7 @@ GitHub.sublime-settings
 .history
 
 #Poetry
-/poetry.toml
+poetry.lock
+
+#security files
+local_settings.py
