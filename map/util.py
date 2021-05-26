@@ -25,8 +25,9 @@ def lat_lon_lists_from_df(df):
 
 def load_dfs(path, allowed_extensions=[".shp", ".zip", ".csv", ".gdb"], ignore_subdirs=[]):
     dfs = {}
+    ignore_dirs = [os.path.join(path, d) for d in ignore_subdirs]
     for subdir, dirs, files in os.walk(path):
-        if subdir not in ignore_subdirs:
+        if subdir not in ignore_dirs:
             for file in files:
                 file_name = os.path.join(subdir, file)
                 extension = os.path.splitext(file_name)[1]

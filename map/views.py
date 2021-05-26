@@ -2,6 +2,7 @@ from django.shortcuts import render
 import plotly.graph_objects as go
 from plotly.offline import plot
 from map.util import load_dfs, get_traces_from_dfs
+import os
 
 # Create your views here.
 
@@ -14,7 +15,7 @@ def about(request):
 
 # Create your views here.
 def home(request):
-    dfs = load_dfs("Data", ignore_subdirs=["Data/BrineFormations", "Data/NAMSS", "Data/pipelines"])
+    dfs = load_dfs("Data", ignore_subdirs=["BrineFormations", "NAMSS", "pipelines"])
     traces = get_traces_from_dfs(dfs)
 
     fig = go.Figure()
