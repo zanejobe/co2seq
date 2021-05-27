@@ -36,8 +36,8 @@ def load_dfs(config_path, data_dir="Data"):
     f = open(config_path)
     config = json.load(f)
     for config_df in config['dataframes']:
-        df_key = config_df["folder"]
-        df_file = os.path.join(data_dir, config_df["folder"], config_df["file"])
+        df_key = config_df["name"]
+        df_file = os.path.join(data_dir, config_df["file"])
         try:
             df = gpd.read_file(df_file)
             dfs[df_key] = DataFrameInfo(lat_col=config_df["latcol"],
