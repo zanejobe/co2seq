@@ -37,7 +37,8 @@
             "latcol": "bh_sfclat",
             "loncol": "bh_sfclon",
             "attributes_to_display": [
-                
+                "bh_api", "bh_opernum", "bh_spuddat", 
+                "bh_tddate"
             ]
         },
         {
@@ -107,7 +108,10 @@
             "latcol": "LAT",
             "loncol": "LONG",
             "attributes_to_display": [
-                
+                "PLAN_CTRL_CD", "PLAN_SITE_TYPE", 
+                "PLAN_SITE_NAME", "WATER_DEPTH", 
+                "SURF_AREA_CODE", "SURF_BLOCK_NUM", 
+                "PLAN_TYPE_CODE"
             ]
         },
         {
