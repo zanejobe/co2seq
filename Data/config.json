@@ -1,0 +1,10 @@
+{
+    "dataframes": [
+        {
+            "name": "emissions.csv",
+            "file": "EPAEmissions/emission_05-24-2021.csv",
+            "latcol": "Facility Latitude",
+            "loncol": "Facility Longitude"
+        }
+    ]
+}
