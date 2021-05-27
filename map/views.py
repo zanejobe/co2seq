@@ -25,13 +25,13 @@ def home(request):
         fig.add_trace(trace)
 
     fig.update_layout(mapbox_style="open-street-map")
-    fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
+    fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 80})
     fig.update_mapboxes(center=go.layout.mapbox.Center(lat=40, lon=-99), zoom=3)
 
     fig.update_layout(
         legend=dict(
             x=1,
-            y=1,
+            y=0.969,
             traceorder="reversed",
             title_font_family="Times New Roman",
             font=dict(
