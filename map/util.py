@@ -25,11 +25,12 @@ def lat_lon_lists_from_df(df):
     return lats, lons
 
 class DataFrameInfo:
-    def __init__(self, lat_col, lon_col, extension, df):
+    def __init__(self, lat_col, lon_col, extension, df, hover_columns):
         self.lat_col = lat_col
         self.lon_col = lon_col
         self.extension = extension
         self.df = df
+        self.hover_columns = hover_columns
 
 def load_dfs(config_path, data_dir="Data"):
     dfs = {}
@@ -43,10 +44,22 @@ def load_dfs(config_path, data_dir="Data"):
             dfs[df_key] = DataFrameInfo(lat_col=config_df["latcol"],
                                         lon_col=config_df["loncol"],
                                         extension=config_df["file_type"],
+                                        # TODO: Manually Assign hover columns
+                                        # hover_columns=config_df["attributes_to_display"],
+                                        hover_columns=df.columns,
                                         df=df)
         except:
             raise Exception(f"Could not construct df from {df_file}")
     return dfs
+
+def get_hover_string_list(df, title, hover_columns):
+    result = []
+    for index, row in df.iterrows():
+        s = f"{title}<br>"
+        for col in hover_columns:
+            s += f"{col} = {row[col]}<br>"
+        result.append(s)
+    return result
 
 def get_traces_from_dfs(dfs):
     traces = []
@@ -55,9 +68,11 @@ def get_traces_from_dfs(dfs):
     for df_name, df_info in dfs.items():
         df = df_info.df
         extension = df_info.extension
+        hover_labels = get_hover_string_list(df, df_name, df_info.hover_columns)
         if extension == "csv":
             traces.append(go.Scattermapbox(name=df_name,
                                            visible="legendonly",
+                                           hovertext=hover_labels,
                                            lat=df[df_info.lat_col], lon=df[df_info.lon_col],
                                            marker={'color': colors[counter % len(colors)], 'size': 5, 'opacity': 0.6}))
             counter += 1
@@ -66,6 +81,7 @@ def get_traces_from_dfs(dfs):
                                 or isinstance(df.geometry[0], shapely.geometry.multilinestring.MultiLineString):
                 lats, lons = lat_lon_lists_from_df(df)
                 traces.append(go.Scattermapbox(name=df_name,
+                                               hovertext=hover_labels,
                                                visible="legendonly",
                                                lon=lons, lat=lats,
                                                mode='lines',
@@ -73,6 +89,7 @@ def get_traces_from_dfs(dfs):
                 counter += 1
             elif isinstance(df.geometry[0], shapely.geometry.point.Point):
                 traces.append(go.Scattermapbox(name=df_name,
+                                               hovertext=hover_labels,
                                                visible="legendonly",
                                                lat=df.geometry.y, lon=df.geometry.x,
                                                marker={'color': colors[counter % len(colors)], 'size': 5, 'opacity': 0.6}))
