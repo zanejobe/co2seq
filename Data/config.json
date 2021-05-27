@@ -1,7 +1,7 @@
 {
     "dataframes": [
         {
-            "folder": "EPAEmissions",
+            "name": "EPAEmissions",
             "file": "emission_05-24-2021.csv",
             "file_type": "csv",
             "latcol": "Facility Latitude",
@@ -11,7 +11,7 @@
             ]
         },
         {
-            "folder": "BoreholesBOEM",
+            "name": "BoreholesBOEM",
             "file": "CleanedBoreholes.csv",
             "file_type": "csv",
             "latcol": "LAT",
@@ -21,7 +21,7 @@
             ]
         },
         {
-            "folder": "GOMSSandsBOEM",
+            "name": "GOMSSandsBOEM",
             "file": "GulfOfMexicoGasAndOilSands_2019.gdb.zip",
             "file_type": "gdb",
             "latcol": "N/A",
@@ -31,7 +31,7 @@
             ]
         },
         {
-            "folder": "GOMWellsNETL",
+            "name": "GOMWellsNETL",
             "file": "boreholes04082013.csv",
             "file_type": "csv",
             "latcol": "bh_sfclat",
@@ -41,8 +41,98 @@
             ]
         },
         {
-            "folder": "NAMSS",
+            "name": "NAMSS",
             "file": "namss.shapefile.zip",
+            "file_type": "shp",
+            "latcol": "N/A",
+            "loncol": "N/A",
+            "attributes_to_display": [
+                
+            ]
+        },
+        {
+            "name": "EIABiodieselPlants",
+            "file": "Biodiesel_Plants_US_EIA.zip",
+            "file_type": "shp",
+            "latcol": "N/A",
+            "loncol": "N/A",
+            "attributes_to_display": [
+                
+            ]
+        },
+        {
+            "name": "EIAOilPipelines",
+            "file": "CrudeOil_Pipelines_US_EIA.zip",
+            "file_type": "shp",
+            "latcol": "N/A",
+            "loncol": "N/A",
+            "attributes_to_display": [
+                
+            ]
+        },
+        {
+            "name": "EIAHGLPipelines",
+            "file": "HGL_Pipelines_US_EIA.zip",
+            "file_type": "shp",
+            "latcol": "N/A",
+            "loncol": "N/A",
+            "attributes_to_display": [
+                
+            ]
+        },
+        {
+            "name": "EIANGPipelines",
+            "file": "NaturalGas_InterIntrastate_Pipelines_US_EIA.zip",
+            "file_type": "shp",
+            "latcol": "N/A",
+            "loncol": "N/A",
+            "attributes_to_display": [
+                
+            ]
+        },
+        {
+            "name": "EIAPetroPipelines",
+            "file": "PetroleumProduct_Pipelines_US_EIA.zip",
+            "file_type": "shp",
+            "latcol": "N/A",
+            "loncol": "N/A",
+            "attributes_to_display": [
+                
+            ]
+        },
+        {
+            "name": "BOEMPlannedWells",
+            "file": "plandelimit.csv",
+            "file_type": "csv",
+            "latcol": "LAT",
+            "loncol": "LONG",
+            "attributes_to_display": [
+                
+            ]
+        },
+        {
+            "name": "Platforms",
+            "file": "platform.zip",
+            "file_type": "shp",
+            "latcol": "N/A",
+            "loncol": "N/A",
+            "attributes_to_display": [
+                
+            ]
+        },
+        {
+            "name": "EIAPowerPlants",
+            "file": "PowerPlants_US_EIA.zip",
+            "file_type": "shp",
+            "latcol": "N/A",
+            "loncol": "N/A",
+            "attributes_to_display": [
+                
+            ]
+        },
+        {
+            "name": "GOMPipelines",
+            "file": "ppl_arcs.zip",
             "file_type": "shp",
             "latcol": "N/A",
             "loncol": "N/A",
