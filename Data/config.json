@@ -1,10 +1,18 @@
 {
     "dataframes": [
         {
-            "name": "emissions.csv",
-            "file": "EPAEmissions/emission_05-24-2021.csv",
+            "folder": "EPAEmissions",
+            "file": "emission_05-24-2021.csv",
+            "file_type": "csv",
             "latcol": "Facility Latitude",
             "loncol": "Facility Longitude"
+        },
+        {
+            "folder": "BoreholesBOEM",
+            "file": "CleanedBoreholes.csv",
+            "file_type": "csv",
+            "latcol": "LAT",
+            "loncol": "LONG"
         }
     ]
 }
