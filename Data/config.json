@@ -5,14 +5,50 @@
             "file": "emission_05-24-2021.csv",
             "file_type": "csv",
             "latcol": "Facility Latitude",
-            "loncol": "Facility Longitude"
+            "loncol": "Facility Longitude",
+            "attributes_to_display": [
+                
+            ]
         },
         {
             "folder": "BoreholesBOEM",
             "file": "CleanedBoreholes.csv",
             "file_type": "csv",
             "latcol": "LAT",
-            "loncol": "LONG"
-        }
+            "loncol": "LONG",
+            "attributes_to_display": [
+                
+            ]
+        },
+        {
+            "folder": "GOMSSandsBOEM",
+            "file": "GulfOfMexicoGasAndOilSands_2019.gdb.zip",
+            "file_type": "gdb",
+            "latcol": "N/A",
+            "loncol": "N/A",
+            "attributes_to_display": [
+                
+            ]
+        },
+        {
+            "folder": "GOMWellsNETL",
+            "file": "boreholes04082013.csv",
+            "file_type": "csv",
+            "latcol": "bh_sfclat",
+            "loncol": "bh_sfclon",
+            "attributes_to_display": [
+                
+            ]
+        },
+        {
+            "folder": "NAMSS",
+            "file": "namss.shapefile.zip",
+            "file_type": "shp",
+            "latcol": "N/A",
+            "loncol": "N/A",
+            "attributes_to_display": [
+                
+            ]
+        },
     ]
 }
