@@ -16,7 +16,7 @@ def about(request):
 # Create your views here.
 def home(request):
 
-    dfs = load_dfs(os.path.join("Data", "config.json"))
+    dfs = load_dfs(os.path.join("Data", "lightweight_conig.json"))
     traces = get_traces_from_dfs(dfs)
 
     fig = go.Figure()
@@ -43,7 +43,7 @@ def home(request):
             )
         )
     )
-
     map_plot = plot({'data': fig}, output_type='div')
+    print("done making html")
 
     return render(request, 'map/home.html', context={'map_plot': map_plot})
