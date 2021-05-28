@@ -43,6 +43,7 @@ def home(request):
             )
         )
     )
+    fig.write_html("test.html")
     map_plot = plot({'data': fig}, output_type='div')
     print("done making html")
 
