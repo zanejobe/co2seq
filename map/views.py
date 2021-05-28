@@ -16,7 +16,7 @@ def about(request):
 # Create your views here.
 def home(request):
 
-    dfs = load_dfs(os.path.join("Data", "lightweight_conig.json"))
+    dfs = load_dfs(os.path.join("Data", "lightweight_config.json"))
     traces = get_traces_from_dfs(dfs)
 
     fig = go.Figure()
