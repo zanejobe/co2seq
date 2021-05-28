@@ -47,8 +47,7 @@ def load_dfs(config_path, data_dir="Data"):
             dfs[df_key] = DataFrameInfo(lat_col=config_df["latcol"],
                                         lon_col=config_df["loncol"],
                                         extension=config_df["file_type"],
-                                        # TODO: Manually specify columns from config
-                                        hover_columns=df.columns[:2],
+                                        hover_columns=config_df["attributes_to_display"],
                                         df=df)
         except:
             raise Exception(f"Could not construct df from {df_file}")
