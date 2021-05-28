@@ -50,7 +50,7 @@ def load_dfs(config_path, data_dir="Data"):
 
 def get_traces_from_dfs(dfs):
     traces = []
-    colors = plotly.colors.qualitative.Alphabet
+    colors = plotly.colors.qualitative.Dark24
     counter = 1
     for df_name, df_info in dfs.items():
         df = df_info.df

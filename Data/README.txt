@@ -23,6 +23,7 @@ From BOEM Map Data:
 https://www.data.boem.gov/Main/Mapping.aspx
 
     ppl_arcs.zip
+    platform.zip
 
 From EIA Map Data:
 https://www.eia.gov/maps/layer_info-m.php

@@ -26,23 +26,24 @@ def home(request):
 
     fig.update_layout(mapbox_style="open-street-map")
     fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
-    fig.update_layout(height=630)
+    fig.update_layout(autosize=True)
+    fig.update_layout(title={"text": "Carbon Sequestration Dashboard",
+        "font": {"family": "Helvetica", "size": 28, "color": "#263F6A"}, "x": 0.01, "y": 0.98})
     fig.update_mapboxes(center=go.layout.mapbox.Center(lat=40, lon=-99), zoom=3)
 
     fig.update_layout(
         legend=dict(
             x=1,
-            y=0.969,
-            traceorder="reversed",
-            title_font_family="Times New Roman",
+            y=0.967,
+            traceorder="normal",
             font=dict(
-                family="Courier",
-                size=20,
-                color="black"
-            ),
-            bgcolor="LightSteelBlue",
-            bordercolor="Black",
-            borderwidth=2
+                family="Georgia",
+                size=18,
+                color="#21314D"
+            )
+            #bgcolor="#92A2BD",
+            #bordercolor="Black",
+            #borderwidth=2
         )
     )
 
