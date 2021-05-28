@@ -58,7 +58,8 @@ def get_hover_string_list(df, title, hover_columns):
     for index, row in df.iterrows():
         s = f"{title}<br>"
         for col in hover_columns:
-            s += f"{col} = {row[col]}<br>"
+            if col in row:
+                s += f"{col} = {row[col]}<br>"
         result.append(s)
     return result
 

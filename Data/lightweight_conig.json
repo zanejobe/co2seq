@@ -1,0 +1,137 @@
+{
+    "dataframes": [
+        {
+            "name": "EPAEmissions",
+            "file": "emission_05-24-2021.csv",
+            "file_type": "csv",
+            "latcol": "Facility Latitude",
+            "loncol": "Facility Longitude",
+            "attributes_to_display":  [ "State", "Facility name", "Facility ID (ORISPL)", "Year", "CO2 (short tons)" 
+                
+            ]
+        },
+        {
+            "name": "BoreholesBOEM",
+            "file": "CleanedBoreholes.csv",
+            "file_type": "csv",
+            "latcol": "LAT",
+            "loncol": "LONG",
+            "attributes_to_display": ["Spud Date", "Total Depth Date", "API Well Number"
+                
+            ]
+        },
+        {
+            "name": "GOMSSandsBOEM",
+            "file": "GulfOfMexicoGasAndOilSands_2019.gdb.zip",
+            "file_type": "gdb",
+            "latcol": "LAT",
+            "loncol": "LONG_",
+            "attributes_to_display": ["SN_FORMSAND", "SAND_NAME", "SDDATE","SDYEAR","WELLAPI", "FDDATE", "FDYEAR", "Original_Oil", "Original_Gas", "Cum_Oil", "Cum_Gas", "Oil_Reserves","Gas_Reserves", "PERMEABILITY", "YIELD",""
+                
+            ]
+        },
+        {
+            "name": "GOMWellsNETL",
+            "file": "boreholes04082013.csv",
+            "file_type": "csv",
+            "latcol": "bh_sfclat",
+            "loncol": "bh_sfclon",
+            "attributes_to_display": [
+                "bh_api", "bh_opernum", "bh_spuddat", 
+                "bh_tddate"
+            ]
+        },
+        {
+            "name": "NAMSS",
+            "file": "namss.shapefile.zip",
+            "file_type": "shp",
+            "latcol": "N/A",
+            "loncol": "N/A",
+            "attributes_to_display": ["SURVEY_ID", "CONTRIBUTOR", "DATA_TYPE", "YEAR", "PLAN_AREAS", "IDENTIFIERS"
+                
+            ]
+        },
+        {
+            "name": "EIABiodieselPlants",
+            "file": "Biodiesel_Plants_US_EIA.zip",
+            "file_type": "shp",
+            "latcol": "Latitude",
+            "loncol": "Longitude",
+            "attributes_to_display": ["Company", "State", "Period", "Source", ""
+                
+            ]
+        },
+        {
+            "name": "EIAOilPipelines",
+            "file": "CrudeOil_Pipelines_US_EIA.zip",
+            "file_type": "shp",
+            "latcol": "N/A",
+            "loncol": "N/A",
+            "attributes_to_display": [ "Opername", "Pipename"
+                
+            ]
+        },
+        {
+            "name": "EIAHGLPipelines",
+            "file": "HGL_Pipelines_US_EIA.zip",
+            "file_type": "shp",
+            "latcol": "N/A",
+            "loncol": "N/A",
+            "attributes_to_display": [ "Opername", "Pipename"
+                
+            ]
+        },
+        {
+            "name": "EIANGPipelines",
+            "file": "NaturalGas_InterIntrastate_Pipelines_US_EIA.zip",
+            "file_type": "shp",
+            "latcol": "N/A",
+            "loncol": "N/A",
+            "attributes_to_display": [ "TYPEPIPE", "Operator", "Status"
+                
+            ]
+        },
+        {
+            "name": "EIAPetroPipelines",
+            "file": "PetroleumProduct_Pipelines_US_EIA.zip",
+            "file_type": "shp",
+            "latcol": "N/A",
+            "loncol": "N/A",
+            "attributes_to_display": [ "Opername", "Pipename"
+                
+            ]
+        },
+        {
+            "name": "BOEMPlannedWells",
+            "file": "plandelimit.csv",
+            "file_type": "csv",
+            "latcol": "LAT",
+            "loncol": "LONG",
+            "attributes_to_display": [
+                "PLAN_CTRL_CD", "PLAN_SITE_TYPE", 
+                "PLAN_SITE_NAME", "WATER_DEPTH", 
+                "SURF_AREA_CODE", "SURF_BLOCK_NUM", 
+                "PLAN_TYPE_CODE"
+            ]
+        },
+        {
+            "name": "Platforms",
+            "file": "platform.zip",
+            "file_type": "shp",
+            "latcol": "N/A",
+            "loncol": "N/A",
+            "attributes_to_display": [ "STR_NUMBER", "COMPLEX_ID", "STR_NAME","INSTALL_DA", "REMOVAL_DA"
+                
+            ]
+        },
+        {
+            "name": "EIAPowerPlants",
+            "file": "PowerPlants_US_EIA.zip",
+            "file_type": "shp",
+            "latcol": "N/A",
+            "loncol": "N/A",
+            "attributes_to_display": [ "Plant_Code", "Plant_Name", "sector_nam", "City", "County", "StateName", "Zip", "Street_Add", "PrimSource", "Install_MW", "Total_MW", "Crude_MW", "Bio_MW", "Geo_MW", "source_des", "tech_desc", "Source", "Period"
+            ]
+        }
+    ]
+}
