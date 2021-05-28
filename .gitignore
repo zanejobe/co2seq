@@ -121,3 +121,6 @@ poetry.lock
 
 #security files
 local_settings.py
+
+#website html
+test.html
