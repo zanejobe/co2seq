@@ -34,16 +34,13 @@ def home(request):
     fig.update_layout(
         legend=dict(
             x=1,
-            y=0.967,
+            y=0.97,
             traceorder="normal",
             font=dict(
                 family="Georgia",
                 size=18,
                 color="#21314D"
             )
-            #bgcolor="#92A2BD",
-            #bordercolor="Black",
-            #borderwidth=2
         )
     )
 
