@@ -25,7 +25,8 @@ def home(request):
         fig.add_trace(trace)
 
     fig.update_layout(mapbox_style="open-street-map")
-    fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 80})
+    fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
+    fig.update_layout(height=630)
     fig.update_mapboxes(center=go.layout.mapbox.Center(lat=40, lon=-99), zoom=3)
 
     fig.update_layout(
