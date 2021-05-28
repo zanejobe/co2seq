@@ -24,8 +24,8 @@
             "name": "GOMSSandsBOEM",
             "file": "GulfOfMexicoGasAndOilSands_2019.gdb.zip",
             "file_type": "gdb",
-            "latcol": "N/A",
-            "loncol": "N/A",
+            "latcol": "LAT",
+            "loncol": "LONG_",
             "attributes_to_display": ["SN_FORMSAND", "SAND_NAME", "SDDATE","SDYEAR","WELLAPI", "FDDATE", "FDYEAR", "Original_Oil", "Original_Gas", "Cum_Oil", "Cum_Gas", "Oil_Reserves","Gas_Reserves", "PERMEABILITY", "YIELD",""
                 
             ]
@@ -55,8 +55,8 @@
             "name": "EIABiodieselPlants",
             "file": "Biodiesel_Plants_US_EIA.zip",
             "file_type": "shp",
-            "latcol": "N/A",
-            "loncol": "N/A",
+            "latcol": "Latitude",
+            "loncol": "Longitude",
             "attributes_to_display": ["Company", "State", "Period", "Source", ""
                 
             ]
