@@ -5,10 +5,11 @@ import geopandas as gpd
 import json
 import plotly
 
-def lat_lon_lists_from_df(df):
+def lat_lon_lists_from_df(df, hover_strings):
     lats = []
     lons = []
-    for feature in df.geometry:
+    new_hover_strings = []
+    for feature, hover_string in zip(df.geometry, hover_strings):
         if isinstance(feature, shapely.geometry.linestring.LineString):
             linestrings = [feature]
         elif isinstance(feature, shapely.geometry.multilinestring.MultiLineString):
@@ -20,9 +21,11 @@ def lat_lon_lists_from_df(df):
             for lat, lon in zip(y, x):
                 lats.append(lat)
                 lons.append(lon)
+                new_hover_strings.append(hover_string)
             lats.append(None)
             lons.append(None)
-    return lats, lons
+            new_hover_strings.append(None)
+    return lats, lons, new_hover_strings
 
 class DataFrameInfo:
     def __init__(self, lat_col, lon_col, extension, df, hover_columns):
@@ -44,9 +47,8 @@ def load_dfs(config_path, data_dir="Data"):
             dfs[df_key] = DataFrameInfo(lat_col=config_df["latcol"],
                                         lon_col=config_df["loncol"],
                                         extension=config_df["file_type"],
-                                        # TODO: Manually Assign hover columns
-                                        # hover_columns=config_df["attributes_to_display"],
-                                        hover_columns=df.columns,
+                                        # TODO: Manually specify columns from config
+                                        hover_columns=df.columns[:2],
                                         df=df)
         except:
             raise Exception(f"Could not construct df from {df_file}")
@@ -79,7 +81,7 @@ def get_traces_from_dfs(dfs):
         if extension == "shp" or extension == "gdb":
             if isinstance(df.geometry[0], shapely.geometry.linestring.LineString) \
                                 or isinstance(df.geometry[0], shapely.geometry.multilinestring.MultiLineString):
-                lats, lons = lat_lon_lists_from_df(df)
+                lats, lons, hover_labels = lat_lon_lists_from_df(df, hover_labels)
                 traces.append(go.Scattermapbox(name=df_name,
                                                hovertext=hover_labels,
                                                visible="legendonly",

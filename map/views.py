@@ -44,7 +44,7 @@ def home(request):
             borderwidth=2
         )
     )
-
     map_plot = plot({'data': fig}, output_type='div')
+    print("done making html")
 
     return render(request, 'map/home.html', context={'map_plot': map_plot})
