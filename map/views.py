@@ -17,18 +17,14 @@ def about(request):
 # Create your views here.
 def home(request):
 
-    us_cities = gpd.read_file("Data/PowerPlants_US_EIA.zip")
+    plants = gpd.read_file("Data/PowerPlants_US_EIA.zip")
     platforms = gpd.read_file("Data/platform.zip")
-    temp = pd.DataFrame()
-    temp['lon'] = platforms['geometry'].x
-    temp['lat'] = platforms['geometry'].y
-    platforms['lat'] = temp['lat']
-    platforms['lon'] = temp['lon']
+    
     #build dictionary of df's
-    data_dict = {"cities": us_cities, "platforms": platforms}
+    data_dict = {"cities": plants, "platforms": platforms}
     fig = go.Figure()
-    fig.add_trace(go.Scattermapbox(lat=us_cities['lat'], lon=us_cities['lon']))
-    fig.add_trace(go.Scattermapbox(lat=platforms['lat'], lon=platforms['lon']))
+    fig.add_trace(go.Scattermapbox(lat=plants['Latitude'], lon=plants['Longitude']))
+    fig.add_trace(go.Scattermapbox(lat=platforms['geometry'].y, lon=platforms['geometry'].x))
     
 
     fig.update_layout(mapbox_style="open-street-map")
