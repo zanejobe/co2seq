@@ -1,7 +1,7 @@
 {
     "dataframes": [
         {
-            "name": "EPA Powerplants",
+            "name": "EPA Power Plants",
             "file": "emission_05-24-2021.csv",
             "file_type": "csv",
             "latcol": "Facility Latitude",
@@ -40,8 +40,7 @@
             "latcol": "bh_sfclat",
             "loncol": "bh_sfclon",
             "attributes_to_display": [
-                "bh_api", "bh_opernum", "bh_spuddat", 
-                "bh_tddate"
+                "bh_api", "bh_opernum", "bh_spuddat", "bh_tddate"
             ]
         },
         {
@@ -50,9 +49,9 @@
             "file_type": "shp",
             "latcol": "N/A",
             "loncol": "N/A",
-            "attributes_to_display": [
-                "SURVEY_ID", "CONTRIBUTOR", "DATA_TYPE", "YEAR", "PLAN_AREAS", 
-                "PROT_AREAS", "IDENTIFIERS"
+            "attributes_to_display": ["SURVEY_ID", "CONTRIBUTOR", "DATA_TYPE", 
+                "YEAR", "PLAN_AREAS", "IDENTIFIERS"
+                
             ]
         },
         {
@@ -61,8 +60,8 @@
             "file_type": "shp",
             "latcol": "Latitude",
             "loncol": "Longitude",
-            "attributes_to_display": [
-                "Company", "State", "Period", "Source"
+            "attributes_to_display": ["Company", "State", "Period", "Source"
+                
             ]
         },
         {
@@ -72,7 +71,7 @@
             "latcol": "N/A",
             "loncol": "N/A",
             "attributes_to_display": [ 
-                "Opername", "Pipename", "Shape_Leng"
+                "Opername", "Pipename"
             ]
         },
         {
@@ -82,7 +81,7 @@
             "latcol": "N/A",
             "loncol": "N/A",
             "attributes_to_display": [ 
-                "Opername", "Pipename", "Shape_Leng"
+                "Opername", "Pipename"
             ]
         },
         {
@@ -92,7 +91,7 @@
             "latcol": "N/A",
             "loncol": "N/A",
             "attributes_to_display": [ 
-                "TYPEPIPE", "Operator", "Status", "Shape_Leng"
+                "TYPEPIPE", "Operator", "Status"
             ]
         },
         {
@@ -102,7 +101,7 @@
             "latcol": "N/A",
             "loncol": "N/A",
             "attributes_to_display": [ 
-                "Opername", "Pipename", "Shape_Leng"
+                "Opername", "Pipename"
             ]
         },
         {
@@ -125,8 +124,9 @@
             "latcol": "N/A",
             "loncol": "N/A",
             "attributes_to_display": [ 
-                "STR_NUMBER", "COMPLEX_ID", "STR_NAME","INSTALL_DA", 
-                "REMOVAL_DA"
+                "STR_NUMBER", "COMPLEX_ID", "STR_NAME", 
+                "INSTALL_DA", "REMOVAL_DA"
+                
             ]
         },
         {
@@ -136,21 +136,10 @@
             "latcol": "N/A",
             "loncol": "N/A",
             "attributes_to_display": [ 
-                "Plant_Code", "Plant_Name", "sector_nam", "City", 
-                "County", "StateName", "Zip", "Street_Add", "PrimSource", 
-                "Install_MW", "Total_MW", "Crude_MW", "Bio_MW", "Geo_MW", 
-                "source_des", "tech_desc", "Source", "Period"
-            ]
-        },
-        {
-            "name": "BOEM GOM Pipelines",
-            "file": "ppl_arcs.zip",
-            "file_type": "shp",
-            "latcol": "N/A",
-            "loncol": "N/A",
-            "attributes_to_display": [ 
-                "SEGMENT_NU", "SEG_LENGTH", "STATUS_COD", "PPL_SIZE_C", 
-                "ROW_NUMBER", "PROD_CODE", "APRV_CODE", "SDE_COMPAN"
+                "Plant_Code", "Plant_Name", "sector_nam", "City", "County", 
+                "StateName", "Zip", "Street_Add", "PrimSource", "Install_MW", 
+                "Total_MW", "Crude_MW", "Bio_MW", "Geo_MW", "source_des", "tech_desc", 
+                "Source", "Period"
             ]
         }
     ]

@@ -9,8 +9,8 @@ import os
 # Create your views here.
 
 
-def home(requests):
-    def plot():
+def home(request):
+    def northAmerica():
 
         dfs = load_dfs(os.path.join("Data", "lightweight_config.json"))
         traces = get_traces_from_dfs(dfs)
@@ -39,14 +39,15 @@ def home(requests):
                 )
             )
         )
-        fig.write_html("test.html")
-        map_plot = plot({'data': fig}, output_type='div')
+        #fig.write_html("test.html")
+        map_plot = plot(fig, output_type='div')
         return map_plot
+    
     context = {
-        'Map': plot()
+        'Map': northAmerica()
     }
 
         #return render(request, 'map/home.html', context={'map_plot': map_plot})
 
 
-    return render(requests, 'homePage/home.html', context)
+    return render(request, 'homePage/home.html', context)
