@@ -32,3 +32,6 @@ https://www.eia.gov/maps/layer_info-m.php
     HGL_Pipelines_US_EIA.zip
     NaturalGas_InterIntrastate_Pipelines_US_EIA.zip
     PetroleumProduct_Pipelines_US_EIA.zip
+
+NAMSS (Seismic Data)
+https://walrus.wr.usgs.gov/namss/
