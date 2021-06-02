@@ -254,6 +254,20 @@ dev = ["dash_flow_example (==0.0.5)", "dash-dangerously-set-inner-html", "flake8
 testing = ["pytest-sugar (>=0.9.4)", "lxml (>=4.6.2)", "selenium (>=3.141.0)", "percy (>=2.0.2)", "requests[security] (>=2.21.0)", "waitress (>=1.4.4)", "cryptography (<3.4)", "pytest (>=4.6,<5)", "pytest-mock (>=2.0.0,<3)", "beautifulsoup4 (>=4.8.2,<=4.9.3)", "pytest (>=6.0.2)", "pytest-mock (>=3.2.0)", "beautifulsoup4 (>=4.8.2)"]
 
 [[package]]
+name = "dash-bootstrap-components"
+version = "0.12.2"
+description = "Bootstrap themed components for use in Plotly Dash"
+category = "main"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, <4"
+
+[package.dependencies]
+dash = ">=1.9.0"
+
+[package.extras]
+pandas = ["numpy", "pandas"]
+
+[[package]]
 name = "dash-core-components"
 version = "1.16.0"
 description = "Core component suite for Dash"
@@ -339,6 +353,14 @@ description = "Django Plotly Dash component suite"
 category = "main"
 optional = false
 python-versions = "*"
+
+[[package]]
+name = "dpd-static-support"
+version = "0.0.5"
+description = "Support for static assets in django-plotly-dash"
+category = "main"
+optional = false
+python-versions = ">=3.5"
 
 [[package]]
 name = "fiona"
@@ -769,7 +791,7 @@ testing = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "7de20d289a585df13326fc6bf294cf17bcecd87724beabb73bd334021fea1973"
+content-hash = "dbae528391cc3b78155d7dc79fb05defc1fbfc564be719e479ae1b5113f64bbd"
 
 [metadata.files]
 aioredis = [
@@ -933,6 +955,10 @@ daphne = [
 dash = [
     {file = "dash-1.20.0.tar.gz", hash = "sha256:127c16f71d3c8345dd29ab2aed099330aafd6d558734bec5bbcccadd0a7e6b29"},
 ]
+dash-bootstrap-components = [
+    {file = "dash-bootstrap-components-0.12.2.tar.gz", hash = "sha256:b3266967f16d542ce715fd8ea0ed082b56e64dfa623750bf8150b72fe7b303ff"},
+    {file = "dash_bootstrap_components-0.12.2-py3-none-any.whl", hash = "sha256:4f697a0996e458a17859614a429f093ab0e143ab359b825e7ac0c1625738c2c8"},
+]
 dash-core-components = [
     {file = "dash_core_components-1.16.0.tar.gz", hash = "sha256:e8cdfaf3580577670bb2d1c3168efa06f5a7b439fbe5527cfaefa3e32394542f"},
 ]
@@ -959,6 +985,10 @@ django-redis = [
 ]
 dpd-components = [
     {file = "dpd_components-0.1.0.tar.gz", hash = "sha256:613a6b17d3d7dd449be060e739e4ce36692b46fa012c3a86ee947f6337d09548"},
+]
+dpd-static-support = [
+    {file = "dpd-static-support-0.0.5.tar.gz", hash = "sha256:ba03e2fde126b45b20df63e3c5eb162d1e9c2ca83868ef37b6f5482abe6f81aa"},
+    {file = "dpd_static_support-0.0.5-py3-none-any.whl", hash = "sha256:34037d342a27e3f183f36150c5956e26fb17de7ee8c4a5b651f7c4edaa6c465d"},
 ]
 fiona = [
     {file = "Fiona-1.8.19-cp36-cp36m-macosx_10_9_x86_64.whl", hash = "sha256:4e54e9b176f42aa1243dbc9f89509866dc0242cffdde40948d0055041bc80735"},

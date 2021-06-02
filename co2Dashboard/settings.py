@@ -131,7 +131,7 @@ CHANNEL_LAYERS = {
     'default' : {
         'BACKEND' : 'channels_redis.core.RedisChannelLayer',
         'CONFIG' : {
-            'hosts' : [('127.0.0.1', 8000), ],
+            'hosts' : [('localhost', 6379)],
         }
     }
 }
@@ -140,16 +140,18 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'django_plotly_dash.finders.DashAssetFinder',
-    'django_plotly_dash.finders.DashComponentFinder'
+    'django_plotly_dash.finders.DashComponentFinder',
+    'django_plotly_dash.finders.DashAppDirectoryFinder',
 ]
 # get dash components 
 PLOTLY_COMPONENTS = [
 
     'dash_core_components',
     'dash_html_components',
+    'dash_bootstrap_components',
     'dash_renderer',
-
-    'dpd_components'
+    'dpd_components',
+    'dpd_static_support',
 ]
 
 

@@ -16,6 +16,8 @@ redis = "^3.5.3"
 django-redis = "^5.0.0"
 channels-redis = "^3.2.0"
 bootstrap4 = "^0.1.0"
+dash-bootstrap-components = "^0.12.2"
+dpd-static-support = "^0.0.5"
 
 [tool.poetry.dev-dependencies]
 

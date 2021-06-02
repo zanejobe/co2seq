@@ -4,9 +4,9 @@ from dash.dependencies import Input, Output
 import plotly.graph_objs as go
 from django_plotly_dash import DjangoDash
 
-#external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
-app = DjangoDash('SimpleExample')
+app = DjangoDash('SimpleExample', external_stylesheets=external_stylesheets)
 
 
 app.layout = html.Div([
