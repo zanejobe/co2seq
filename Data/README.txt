@@ -1,8 +1,9 @@
 References:
-Sands - https://www.data.boem.gov/Main/GandG.aspx
-WellsBOEM - https://www.data.bsee.gov/Main/Production.aspx
+GOMSandsBOEM - https://www.data.boem.gov/Main/GandG.aspx
+WellsBOEM - https://www.data.boem.gov/Main/Production.aspx
 WellsNETL - https://edx.netl.doe.gov/geocube/#collections/offshore
-BoreholesBOEM - https://www.data.bsee.gov/Main/Well.aspx
+BoreholesBOEM - https://www.data.boem.gov/Main/Well.aspx
+PlannedWellsBOEM - https://www.data.boem.gov/Main/Plans.aspx
 
 Brine stuff:
 https://www.beg.utexas.edu/gccc/research/brine-main
@@ -17,3 +18,17 @@ Deepwater Natural Gas and Oil Qualified Fields- The following table lists the ni
 https://www.data.boem.gov/Other/DataTables/DeepQualFields.aspx
 
 EPA Emissions - https://ampd.epa.gov/ampd/
+
+From BOEM Map Data:
+https://www.data.boem.gov/Main/Mapping.aspx
+
+    ppl_arcs.zip
+    platform.zip
+
+From EIA Map Data:
+https://www.eia.gov/maps/layer_info-m.php
+
+    CrudeOil_Pipelines_US_EIA.zip
+    HGL_Pipelines_US_EIA.zip
+    NaturalGas_InterIntrastate_Pipelines_US_EIA.zip
+    PetroleumProduct_Pipelines_US_EIA.zip
