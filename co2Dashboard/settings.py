@@ -156,7 +156,7 @@ PLOTLY_COMPONENTS = [
 
 
 # Static files (CSS, JavaScript, Images)
-STATICFILE_LOCATION = 'static'
+STATICFILES_LOCATION = 'static'
 STATIC_URL = '/static/'
 STATIC_ROOT = 'static'
 STATICFILES_DIRS = [
