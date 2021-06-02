@@ -7,42 +7,10 @@ import dash  # (version 1.12.0) pip install dash
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
+import geopandas as gpd
 
 from utils import *
 import os
-
-
-
-def graphing(dataframes):
-
-    dfs = dataframes
-    traces = get_traces_from_dfs(dfs)
-
-    fig = go.Figure()
-
-    for trace in traces:
-        fig.add_trace(trace)
-
-    fig.update_layout(mapbox_style="open-street-map")
-    fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
-    fig.update_layout(autosize=True)
-    fig.update_layout(title={"text": "Carbon Sequestration Dashboard",
-        "font": {"family": "Helvetica", "size": 28, "color": "#263F6A"}, "x": 0.01, "y": 0.98})
-    fig.update_mapboxes(center=go.layout.mapbox.Center(lat=40, lon=-99), zoom=3)
-
-    fig.update_layout(
-        legend=dict(
-            x=1,
-            y=0.97,
-            traceorder="normal",
-            font=dict(
-                family="Georgia",
-                size=18,
-                color="#21314D"
-            )
-        )
-    )
-    return fig
 
 
 # ------------------------------------------------------------------------------
@@ -51,12 +19,19 @@ app = dash.Dash(__name__)
 #define interface
 
 #dataframes of all data
-dfs = load_dfs(os.path.join("Data", "lightweight_config.json"))
-df = dfs.get('EPA Power Plants')
+'''dfs = load_dfs(os.path.join("Data", "lightweight_config.json"))
+df = dfs.get('EPA Power Plants')'''
 
-available_indicators = dfs.keys()
-print(available_indicators)
+data = gpd.read_file("Data/platform.zip")
+data2 = gpd.read_file("Data/PowerPlants_US_EIA.zip")
 
+data_dict = {
+    "Platform"  : data,
+    "Plants"    : data2
+}
+
+available_indicators = data_dict.keys()
+#print(available_indicators)
 
 
 app.layout = html.Div([
@@ -64,24 +39,36 @@ app.layout = html.Div([
 
         html.Div([
             dcc.Dropdown(
-                id='crossfilter-xaxis-column',
+                id='selected-plot',
                 options=[{'label': i, 'value': i} for i in available_indicators],
-                value='Fertility rate, total (births per woman)'
-            ),
-            dcc.RadioItems(
-                id='crossfilter-xaxis-type',
-                options=[{'label': i, 'value': i} for i in ['Linear', 'Log']],
-                value='Linear',
-                labelStyle={'display': 'inline-block'}
+                value='Platform',
+                multi=True,
             )
         ],
         style={'width': '49%', 'display': 'inline-block'}),
     ]),
 
     html.Div([
-        dcc.Graph(figure=graphing(dfs))
+        dcc.Graph(id='northAmericaMap')
     ])
 ])
 
+@app.callback(
+    Output('northAmericaMap', 'figure'),
+    Input('selected-plot', 'value'))
+def update_figure(selected_plot):
+    print(selected_plot)
+   
+    filtered_df = data_dict.get(selected_plot)
+
+    fig = px.scatter_mapbox(filtered_df, lat=filtered_df['geometry'].y, lon=filtered_df['geometry'].x)
+
+    fig.update_layout(mapbox_style="open-street-map", transition_duration=500)
+
+    return fig
+
 if __name__ == '__main__':
     app.run_server(debug=True)
+
+
+
