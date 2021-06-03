@@ -1,3 +1,4 @@
+
 {
     "dataframes": [
         {
@@ -9,6 +10,112 @@
             "attributes_to_display":  [ 
                 "State", "Facility name", "Facility ID (ORISPL)", "Year", 
                 "CO2 (short tons)" 
+            ]
+        },
+        {
+            "name": "BOEM Boreholes",
+            "file": "CleanedBoreholes.csv",
+            "file_type": "csv",
+            "latcol": "LAT",
+            "loncol": "LONG",
+            "attributes_to_display": [
+                "Spud Date", "Total Depth Date", "API Well Number"
+            ]
+        },
+        {
+            "name": "BOEM GOM Sands",
+            "file": "GulfOfMexicoGasAndOilSands_2019.gdb.zip",
+            "file_type": "gdb",
+            "latcol": "LAT",
+            "loncol": "LONG_",
+            "attributes_to_display": [
+                "SN_FORMSAND", "SAND_NAME", "SDDATE","SDYEAR","WELLAPI", "FDDATE", 
+                "FDYEAR", "Original_Oil", "Original_Gas", "Cum_Oil", "Cum_Gas", 
+                "Oil_Reserves","Gas_Reserves", "PERMEABILITY", "YIELD"
+            ]
+        },
+        {
+            "name": "NETL GOM Wells",
+            "file": "boreholes04082013.csv",
+            "file_type": "csv",
+            "latcol": "bh_sfclat",
+            "loncol": "bh_sfclon",
+            "attributes_to_display": [
+                "bh_api", "bh_opernum", "bh_spuddat", "bh_tddate"
+            ]
+        },
+        {
+            "name": "USGS Seismic Data (NAMSS)",
+            "file": "namss.shapefile.zip",
+            "file_type": "shp",
+            "latcol": "N/A",
+            "loncol": "N/A",
+            "attributes_to_display": ["SURVEY_ID", "CONTRIBUTOR", "DATA_TYPE", 
+                "YEAR", "PLAN_AREAS", "IDENTIFIERS"
+                
+            ]
+        },
+        {
+            "name": "EIA Biodiesel Plants",
+            "file": "Biodiesel_Plants_US_EIA.zip",
+            "file_type": "shp",
+            "latcol": "Latitude",
+            "loncol": "Longitude",
+            "attributes_to_display": ["Company", "State", "Period", "Source"
+                
+            ]
+        },
+        {
+            "name": "EIA Oil Pipelines",
+            "file": "CrudeOil_Pipelines_US_EIA.zip",
+            "file_type": "shp",
+            "latcol": "N/A",
+            "loncol": "N/A",
+            "attributes_to_display": [ 
+                "Opername", "Pipename"
+            ]
+        },
+        {
+            "name": "EIA HGL Pipelines",
+            "file": "HGL_Pipelines_US_EIA.zip",
+            "file_type": "shp",
+            "latcol": "N/A",
+            "loncol": "N/A",
+            "attributes_to_display": [ 
+                "Opername", "Pipename"
+            ]
+        },
+        {
+            "name": "EIA NG Pipelines",
+            "file": "NaturalGas_InterIntrastate_Pipelines_US_EIA.zip",
+            "file_type": "shp",
+            "latcol": "N/A",
+            "loncol": "N/A",
+            "attributes_to_display": [ 
+                "TYPEPIPE", "Operator", "Status"
+            ]
+        },
+        {
+            "name": "EIA Petro Pipelines",
+            "file": "PetroleumProduct_Pipelines_US_EIA.zip",
+            "file_type": "shp",
+            "latcol": "N/A",
+            "loncol": "N/A",
+            "attributes_to_display": [ 
+                "Opername", "Pipename"
+            ]
+        },
+        {
+            "name": "BOEM Planned Wells",
+            "file": "plandelimit.csv",
+            "file_type": "csv",
+            "latcol": "LAT",
+            "loncol": "LONG",
+            "attributes_to_display": [
+                "PLAN_CTRL_CD", "PLAN_SITE_TYPE", 
+                "PLAN_SITE_NAME", "WATER_DEPTH", 
+                "SURF_AREA_CODE", "SURF_BLOCK_NUM", 
+                "PLAN_TYPE_CODE"
             ]
         },
         {
