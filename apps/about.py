@@ -20,5 +20,7 @@ layout = html.Div([
         dbc.Row([
             dbc.Col(html.H6(children='Data sources and relevant links.'), className="mb-4")
         ]),
-    ])
+    ]),
+    html.Br(),
+    dcc.Link('Home', href='/'),
 ])

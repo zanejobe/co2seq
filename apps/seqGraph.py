@@ -5,7 +5,7 @@ import dash  # (version 1.12.0) pip install dash
 import dash_core_components as dcc
 import dash_html_components as html
 import dash_bootstrap_components as dbc
-from dash.dependencies import Input, Output
+from dash.dependencies import Input, Output, State
 import geopandas as gpd
 
 from app import app
@@ -59,9 +59,41 @@ layout = html.Div([
                                      className="text-center text-light bg-dark"), body=True, color="dark")
                     , className="mb-4")
         ]),
-    dcc.Graph(
-        id='northAmericanMap',
-        figure=theMap()
-    ),
+        dcc.Graph(
+            id='northAmericanMap',
+            figure=theMap()
+        ),
+        dbc.Button("Open modal", id="open"),
+        dbc.Modal(
+            [
+                dbc.ModalHeader("Header"),
+                dbc.ModalBody("This is the content of the modal"),
+                dbc.ModalFooter(
+                    dbc.Button("Close", id="close", className="ml-auto")
+                ),
+            ],
+            id="modal",
+        ),
+        html.Br(),
+        dcc.Link('About', href='/apps/about'),
     ])
 ])
+'''
+Callback to make datapoints interactive
+'''
+
+
+
+@app.callback(
+    Output("modal", "is_open"),
+    [Input("open", "n_clicks"), Input("close", "n_clicks")],
+    [State("modal", "is_open")],
+)
+def toggle_modal(n1, n2, is_open):
+    if n1 or n2:
+        return not is_open
+    return is_open
+
+
+def display_click_data(clickData):
+    return json.dumps(clickData, indent=2)

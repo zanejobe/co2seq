@@ -10,12 +10,17 @@ from app import server
 from apps import seqGraph, about
 
 
-app.layout = html.Div([
+'''app.layout = html.Div([
     dcc.Location(id='url', refresh=False),
     html.Div([
-        dcc.Link('Geo Map |', href='/apps/seqGraph'),
+        dcc.Link('Geo Map | ', href='/apps/seqGraph'),
         dcc.Link('About', href='/apps/about'),
     ], className="row"),
+    html.Div(id='page-content', children=[])
+])'''
+
+app.layout = html.Div([
+    dcc.Location(id='url', refresh=False),
     html.Div(id='page-content', children=[])
 ])
 
@@ -28,8 +33,8 @@ def display_page(pathname):
     if pathname == '/apps/about':
         return about.layout
     else:
-        return "404 Page Error! Please choose a link"
+        return seqGraph.layout
 
 
 if __name__ == '__main__':
-    app.run_server(debug=False)
+    app.run_server(debug=False, use_reloader=False)
