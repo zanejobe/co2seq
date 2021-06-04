@@ -59,31 +59,33 @@ layout = html.Div([
                                      className="text-center text-light bg-dark"), body=True, color="dark")
                     , className="mb-4")
         ]),
-        dcc.Graph(
-            id='northAmericanMap',
-            figure=theMap()
-        ),
-        dbc.Button("Open modal", id="open"),
-        dbc.Modal(
-            [
-                dbc.ModalHeader("Header"),
-                dbc.ModalBody("This is the content of the modal"),
-                dbc.ModalFooter(
-                    dbc.Button("Close", id="close", className="ml-auto")
-                ),
-            ],
-            id="modal",
-        ),
-        html.Br(),
-        dcc.Link('About', href='/apps/about'),
+        dbc.Row([
+            dcc.Graph(
+                id='northAmericanMap',
+                figure=theMap()
+            )
+        ]),
+        dbc.Row([
+            dbc.Button("Open modal", id="open"),
+            dbc.Modal(
+                [
+                    dbc.ModalHeader("Header"),
+                    dbc.ModalBody("This is the content of the modal"),
+                    dbc.ModalFooter(
+                        dbc.Button("Close", id="close", className="ml-auto")
+                    ),
+                ],
+                id="modal",
+            ),
+        ]),
+        dbc.Row([
+            dcc.Link('About', href='/apps/about')
+        ])      
     ])
 ])
 '''
 Callback to make datapoints interactive
 '''
-
-
-
 @app.callback(
     Output("modal", "is_open"),
     [Input("open", "n_clicks"), Input("close", "n_clicks")],
@@ -93,7 +95,3 @@ def toggle_modal(n1, n2, is_open):
     if n1 or n2:
         return not is_open
     return is_open
-
-
-def display_click_data(clickData):
-    return json.dumps(clickData, indent=2)
