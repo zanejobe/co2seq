@@ -142,6 +142,16 @@
                 "Total_MW", "Crude_MW", "Bio_MW", "Geo_MW", "source_des", "tech_desc", 
                 "Source", "Period"
             ]
+        },
+        {
+            "name": "Sedimentary Basins",
+            "file": "Sedimentary_Basins.zip",
+            "file_type": "shp",
+            "latcol": "N/A",
+            "loncol": "N/A",
+            "attributes_to_display": [
+                "PltTectSet", "Era", "BasinType", "Name"
+            ]
         }
     ]
 }
