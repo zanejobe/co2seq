@@ -10,14 +10,21 @@ def lat_lon_lists_from_df(df, hover_strings):
     lons = []
     new_hover_strings = []
     for feature, hover_string in zip(df.geometry, hover_strings):
-        if isinstance(feature, shapely.geometry.linestring.LineString):
+        if isinstance(feature, shapely.geometry.linestring.LineString)\
+                or isinstance(feature, shapely.geometry.polygon.Polygon):
             linestrings = [feature]
-        elif isinstance(feature, shapely.geometry.multilinestring.MultiLineString):
+        elif isinstance(feature, shapely.geometry.multilinestring.MultiLineString)\
+                or isinstance(feature, shapely.geometry.multipolygon.MultiPolygon):
             linestrings = feature.geoms
         else:
             continue
         for linestring in linestrings:
-            x, y = linestring.xy
+            x = []
+            y = []
+            if isinstance(linestring, shapely.geometry.linestring.LineString):
+                x, y = linestring.xy
+            if isinstance(linestring, shapely.geometry.polygon.Polygon):
+                x, y = linestring.exterior.coords.xy
             for lat, lon in zip(y, x):
                 lats.append(lat)
                 lons.append(lon)
@@ -95,6 +102,16 @@ def get_traces_from_dfs(dfs):
                                                visible="legendonly",
                                                lat=df.geometry.y, lon=df.geometry.x,
                                                marker={'color': colors[counter % len(colors)], 'size': 5, 'opacity': 0.6}))
+                counter += 1
+            elif isinstance(df.geometry[0], shapely.geometry.polygon.Polygon):
+                lats, lons, hover_labels = lat_lon_lists_from_df(df, hover_labels)
+                traces.append(go.Scattermapbox(name=df_name,
+                                               hovertext=hover_labels,
+                                               visible="legendonly",
+                                               fill="toself",
+                                               lon=lons, lat=lats,
+                                               mode='lines',
+                                               line=dict(width=1, color=colors[counter % len(colors)])))
                 counter += 1
             else:
                 raise Exception(f"The geometry in {df_name} is not supported")
