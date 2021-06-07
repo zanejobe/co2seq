@@ -1,4 +1,6 @@
+
 import plotly.graph_objects as go
+import plotly.express as px
 from plotly.offline import plot
 
 import dash  # (version 1.12.0) pip install dash
@@ -11,6 +13,7 @@ import geopandas as gpd
 from app import app
 from utils import *
 import os
+
 
 def theMap():
 
@@ -41,7 +44,10 @@ def theMap():
     )
 
     return fig
-
+def lineboiz():
+    df = px.data.gapminder().query("country=='Canada'")
+    fig = px.line(df, x="year", y="lifeExp", title='Life expectancy in Canada')
+    return fig
 '''
 Layout for Page 1 hosts map object and general overview
 '''
@@ -66,16 +72,16 @@ layout = html.Div([
             )
         ]),
         dbc.Row([
-            dbc.Button("Open modal", id="open"),
-            dbc.Modal(
-                [
-                    dbc.ModalHeader("Header"),
-                    dbc.ModalBody("This is the content of the modal"),
-                    dbc.ModalFooter(
-                        dbc.Button("Close", id="close", className="ml-auto")
-                    ),
-                ],
-                id="modal",
+            html.P("x-axis:"),
+            dcc.Checklist(
+                id='x-axis', 
+                options=[{'value': x, 'label': x} 
+                        for x in [1,2,3,4,5]],
+                value=[1], 
+                labelStyle={'display': 'inline-block'}
+            ),
+            dcc.Graph(
+                figure=lineboiz()
             ),
         ]),
         dbc.Row([
@@ -86,7 +92,8 @@ layout = html.Div([
 '''
 Callback to make datapoints interactive
 '''
-@app.callback(
+
+'''@app.callback(
     Output("modal", "is_open"),
     [Input("open", "n_clicks"), Input("close", "n_clicks")],
     [State("modal", "is_open")],
@@ -94,4 +101,4 @@ Callback to make datapoints interactive
 def toggle_modal(n1, n2, is_open):
     if n1 or n2:
         return not is_open
-    return is_open
+    return is_open'''
