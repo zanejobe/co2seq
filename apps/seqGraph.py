@@ -3,50 +3,60 @@ import plotly.graph_objects as go
 import plotly.express as px
 from plotly.offline import plot
 
-import dash  # (version 1.12.0) pip install dash
+import dash
 import dash_core_components as dcc
 import dash_html_components as html
 import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output, State
 import geopandas as gpd
 
+import dash_leaflet as dl
+import dash_leaflet.express as dlx
+from dash import Dash
+from dash.dependencies import Output, Input
+from dash_extensions.javascript import arrow_function
+
 from app import app
 from utils import *
 import os
 
 
-def theMap():
 
-    dfs = load_dfs(os.path.join("Data", "lightweight_config.json"))
-    traces = get_traces_from_dfs(dfs)
 
-    fig = go.Figure()
+dfs = load_dfs(os.path.join("Data", "lightweight_config.json"))
+traces = get_traces_from_dfs(dfs)
 
-    for trace in traces:
-        fig.add_trace(trace)
+fig = go.Figure()
 
-    fig.update_layout(mapbox_style="open-street-map")
-    fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
-    fig.update_layout(autosize=True)
-    fig.update_mapboxes(center=go.layout.mapbox.Center(lat=40, lon=-99), zoom=3)
+for trace in traces:
+    fig.add_trace(trace)
 
-    fig.update_layout(
-        legend=dict(
-            x=1,
-            y=0.9,
-            traceorder="normal",
-            font=dict(
-                family="Georgia",
-                size=18,
-                color="#21314D"
-            )
+fig.update_layout(mapbox_style="open-street-map")
+fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
+fig.update_layout(autosize=True)
+fig.update_mapboxes(center=go.layout.mapbox.Center(lat=40, lon=-99), zoom=3)
+
+fig.update_layout(
+    legend=dict(
+        x=1,
+        y=0.9,
+        traceorder="normal",
+        font=dict(
+            family="Georgia",
+            size=18,
+            color="#21314D"
         )
     )
+)
 
-    return fig
 def lineboiz():
-    df = px.data.gapminder().query("country=='Canada'")
-    fig = px.line(df, x="year", y="lifeExp", title = "graph boi")
+    df_basin = dfs['Sedimentary Basins'].df
+    df_emission = dfs['EPA Power Plants'].df
+
+    for basin in df_basin.value():
+        
+
+    fig = px.scatter(df, x="year", y="lifeExp", title = "graph boi")
     return fig
 
 def barboiz():
@@ -73,8 +83,7 @@ layout = html.Div([
         dbc.Row([
             dcc.Graph(
                 id='northAmericanMap',
-                figure=theMap(),
-                config={'autosizable': True}
+                figure=fig,
             )
         ]),
         dbc.Row([
@@ -90,16 +99,3 @@ layout = html.Div([
         ])      
     ])
 ])
-'''
-Callback to make datapoints interactive
-'''
-
-'''@app.callback(
-    Output("modal", "is_open"),
-    [Input("open", "n_clicks"), Input("close", "n_clicks")],
-    [State("modal", "is_open")],
-)
-def toggle_modal(n1, n2, is_open):
-    if n1 or n2:
-        return not is_open
-    return is_open'''

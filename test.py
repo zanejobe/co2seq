@@ -1,17 +1,59 @@
+import plotly.graph_objects as go
+import plotly.express as px
+from plotly.offline import plot
+
 import dash
-from dash import Dash
 import dash_core_components as dcc
 import dash_html_components as html
-from dash.dependencies import Input, Output
-import plotly.express as px
-import json
-
+import dash_bootstrap_components as dbc
+from dash.dependencies import Input, Output, State
 import geopandas as gpd
+
+import dash_leaflet as dl
+import dash_leaflet.express as dlx
+from dash import Dash
+from dash.dependencies import Output, Input
+from dash_extensions.javascript import arrow_function
+
+from app import app
 from utils import *
+import os
+
+from shapely.geometry import Point, Polygon
+
+
 
 
 dfs = load_dfs(os.path.join("Data", "lightweight_config.json"))
 
-for df in dfs.values():
-    geo = df.df
-    geo.to_file("GeoDataMap.geojson", driver='GeoJSON')
+
+
+
+df_basin = dfs['Sedimentary Basins'].df
+df_emission = dfs['EPA Power Plants'].df
+
+
+co2_list = []
+storage_list = []
+
+for index, basin_row in df_basin.iterrows():
+    co2_short_tons = 0.0
+    storage_list.append(basin_row[''])
+    
+    coords = basin_row['geometry']
+    poly = Polygon(coords)
+
+    for index, plant_row in df_emission.iterrows():
+        lat= plant_row["Facility Latitude"]
+        lon = plant_row["Facility Longitude"]
+        the_point = Point(lon, lat)
+
+        if poly.contains(the_point):
+            co2_short_tons += plant_row["CO2 (short tons)" ]
+
+    co2_list.append(co2_short_tons)
+
+
+    
+    
+    
