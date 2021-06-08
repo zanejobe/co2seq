@@ -145,7 +145,7 @@
         },
         {
             "name": "Sedimentary Basins",
-            "file": "Sedimentary_Basins.zip",
+            "file": "SedimentaryBasinsUS.zip",
             "file_type": "shp",
             "latcol": "N/A",
             "loncol": "N/A",
