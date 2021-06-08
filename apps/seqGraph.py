@@ -33,7 +33,7 @@ def theMap():
     fig.update_layout(
         legend=dict(
             x=1,
-            y=0.97,
+            y=0.9,
             traceorder="normal",
             font=dict(
                 family="Georgia",
@@ -46,7 +46,12 @@ def theMap():
     return fig
 def lineboiz():
     df = px.data.gapminder().query("country=='Canada'")
-    fig = px.line(df, x="year", y="lifeExp", title='Life expectancy in Canada')
+    fig = px.line(df, x="year", y="lifeExp", title = "graph boi")
+    return fig
+
+def barboiz():
+    df = px.data.tips()
+    fig = px.box(df, y="total_bill", title = "graph boi")
     return fig
 '''
 Layout for Page 1 hosts map object and general overview
@@ -68,21 +73,17 @@ layout = html.Div([
         dbc.Row([
             dcc.Graph(
                 id='northAmericanMap',
-                figure=theMap()
+                figure=theMap(),
+                config={'autosizable': True}
             )
         ]),
         dbc.Row([
-            html.P("x-axis:"),
-            dcc.Checklist(
-                id='x-axis', 
-                options=[{'value': x, 'label': x} 
-                        for x in [1,2,3,4,5]],
-                value=[1], 
-                labelStyle={'display': 'inline-block'}
-            ),
-            dcc.Graph(
-                figure=lineboiz()
-            ),
+            dbc.Col(html.Div(
+                dcc.Graph(figure=barboiz())
+            )),
+            dbc.Col(html.Div(
+                dcc.Graph(figure=lineboiz())
+            )),
         ]),
         dbc.Row([
             dcc.Link('About', href='/apps/about')
