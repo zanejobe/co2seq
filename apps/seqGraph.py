@@ -9,6 +9,7 @@ import dash_html_components as html
 import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output, State
 import geopandas as gpd
+import pandas as pd
 
 import dash_leaflet as dl
 import dash_leaflet.express as dlx
@@ -58,10 +59,13 @@ def scatterboiz():
 
     co2_list = []
     storage_list = []
+    names = []
+
+    columns = ['Name', 'Emissions', 'Storage']
+    df = pd.DataFrame(columns=columns)
 
     for index, basin_row in exp_basin.iterrows():
         co2_short_tons = 0.0
-        storage_list.append(basin_row['Storage'])
         
         coords = basin_row['geometry']
         poly = Polygon(coords)
@@ -71,18 +75,56 @@ def scatterboiz():
             lon = plant_row["Facility Longitude"]
             the_point = Point(float(lon), float(lat))
 
-            if poly.contains(the_point):
+            if poly.contains(the_point) and float(plant_row["CO2 (short tons)" ]) > 0.0:
                 co2_short_tons += float(plant_row["CO2 (short tons)" ])
 
-        co2_list.append(co2_short_tons)
+        if co2_short_tons > 0.0 and basin_row['Storage'] > 0.0:
+            names.append(basin_row['Name'])
+            storage_list.append(basin_row['Storage'])
+            co2_list.append(co2_short_tons)
         
+    df['Name'] = names
+    df['Emissions'] = co2_list
+    df['Storage'] = storage_list
+    fig = px.scatter(df, x='Emissions', y='Storage', 
+            title = "graph boi",
+            hover_data=['Name', 'Storage', 'Emissions'])
 
-    fig = px.scatter(x=co2_list, y=storage_list, title = "graph boi")
     return fig
 
 def barboiz():
-    df = px.data.tips()
-    fig = px.box(df, y="total_bill", title = "graph boi")
+    df_basin = dfs['Sedimentary Basins'].df
+    df_emission = dfs['EPA Power Plants'].df
+
+    exp_basin = df_basin.explode()   
+
+    basinFrames = {}
+
+    for index, basin_row in exp_basin.iterrows():
+        plants_per_basin = []
+        emission_per_plant = []
+        
+        coords = basin_row['geometry']
+        poly = Polygon(coords)
+  
+        for index, plant_row in df_emission.iterrows():
+            lat= plant_row["Facility Latitude"]
+            lon = plant_row["Facility Longitude"]
+            the_point = Point(float(lon), float(lat))
+
+            if poly.contains(the_point) and float(plant_row["CO2 (short tons)" ]) > 0.0:
+
+                plants_per_basin.append(plant_row['Facility Name'])
+                emission_per_plant.append(plant_row['CO2 (short tons)'])
+
+        columns = ['PlantName', 'Emissions']
+        df = pd.DataFrame(columns=columns)
+        df['PlantName'] = plants_per_basin
+        df['Emissions'] = emission_per_plant
+
+        basinFrames[basin_row['Name']] = df
+    
+    fig = px.box(basinFrames["Denver Basin"], y="Emissions", title = "graph boi")
     return fig
 '''
 Layout for Page 1 hosts map object and general overview

@@ -8,6 +8,7 @@ import dash_html_components as html
 import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output, State
 import geopandas as gpd
+import pandas as pd
 
 import dash_leaflet as dl
 import dash_leaflet.express as dlx
@@ -21,44 +22,44 @@ import os
 
 from shapely.geometry import Point, Polygon
 
-
-
-
 dfs = load_dfs(os.path.join("Data", "lightweight_config.json"))
-
-
-
 
 df_basin = dfs['Sedimentary Basins'].df
 df_emission = dfs['EPA Power Plants'].df
 
-exp_basin = df_basin.explode()
+exp_basin = df_basin.explode()   
 
-
-co2_list = []
-storage_list = []
+basinFrames = {}
 
 for index, basin_row in exp_basin.iterrows():
-    co2_short_tons = 0.0
-    storage_list.append(basin_row['Storage'])
+    plants_per_basin = []
+    emission_per_plant = []
     
     coords = basin_row['geometry']
-    
     poly = Polygon(coords)
-
 
     for index, plant_row in df_emission.iterrows():
         lat= plant_row["Facility Latitude"]
         lon = plant_row["Facility Longitude"]
-        #print(lat, lon)
         the_point = Point(float(lon), float(lat))
 
-        if poly.contains(the_point):
-            print(plant_row["CO2 (short tons)" ])
+        if poly.contains(the_point) and float(plant_row["CO2 (short tons)" ]) > 0.0:
 
-    co2_list.append(co2_short_tons)
+            print(plant_row)
 
+            plants_per_basin.append(plant_row["Facility Name"])
+            emission_per_plant.append(plant_row['CO2 (short tons)'])
 
+    columns = ['PlantName', 'Emissions']
+    df = pd.DataFrame(columns=columns)
+    df['PlantName'] = plants_per_basin
+    df['Emissions'] = emission_per_plant
+
+    basinFrames[basin_row['Name']] = df
+
+fig = px.box(basinFrames.keys()[0], y="Emissions", title = "graph boi")
+
+fig.show()
 
 
     

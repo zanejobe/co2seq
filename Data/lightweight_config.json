@@ -8,7 +8,7 @@
             "latcol": "Facility Latitude",
             "loncol": "Facility Longitude",
             "attributes_to_display":  [ 
-                "State", "Facility name", "Facility ID (ORISPL)", "Year", 
+                "State", "Facility Name", "Facility ID (ORISPL)", "Year", 
                 "CO2 (short tons)" 
             ]
         },
