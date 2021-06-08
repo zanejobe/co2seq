@@ -8,7 +8,9 @@ import dash_core_components as dcc
 import dash_html_components as html
 import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output, State
+import dash_leaflet as dl
 import geopandas as gpd
+import json
 
 from app import app
 from utils import *
@@ -71,11 +73,21 @@ layout = html.Div([
                     , className="mb-4")
         ]),
         dbc.Row([
-            dcc.Graph(
-                id='northAmericanMap',
-                figure=theMap(),
-                config={'autosizable': True}
-            )
+            html.Div([
+                dl.Map(
+                children=[
+                    dl.TileLayer(),
+                    dl.GeoJSON(url="assets/basins.geojson", id="capitals"),
+                    dl.GeoJSON(url="assets/pipelines.geojson", id="pipelines"),
+                    # dl.GeoJSON(data=power_plants, id="powerplants")
+
+                ],
+                zoom=5,
+                style={'width': '600px',
+                      'height': '500px',
+                      'padding': '5px',
+                      'display': 'table-cell'}),
+                ]),
         ]),
         dbc.Row([
             dbc.Col(html.Div(
