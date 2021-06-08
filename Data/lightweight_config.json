@@ -150,7 +150,7 @@
             "latcol": "N/A",
             "loncol": "N/A",
             "attributes_to_display": [
-                "PltTectSet", "Era", "BasinType", "Name"
+                "PltTectSet", "Era", "BasinType", "Name", "Storage"
             ]
         }
     ]
