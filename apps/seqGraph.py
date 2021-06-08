@@ -15,6 +15,7 @@ import dash_leaflet.express as dlx
 from dash import Dash
 from dash.dependencies import Output, Input
 from dash_extensions.javascript import arrow_function
+from shapely.geometry import Point, Polygon
 
 from app import app
 from utils import *
@@ -49,14 +50,34 @@ fig.update_layout(
     )
 )
 
-def lineboiz():
+def scatterboiz():
     df_basin = dfs['Sedimentary Basins'].df
     df_emission = dfs['EPA Power Plants'].df
 
-    for basin in df_basin.value():
+    exp_basin = df_basin.explode()
+
+    co2_list = []
+    storage_list = []
+
+    for index, basin_row in exp_basin.iterrows():
+        co2_short_tons = 0.0
+        storage_list.append(basin_row['Storage'])
+        
+        coords = basin_row['geometry']
+        poly = Polygon(coords)
+
+        for index, plant_row in df_emission.iterrows():
+            lat= plant_row["Facility Latitude"]
+            lon = plant_row["Facility Longitude"]
+            the_point = Point(lon, lat)
+
+            if poly.contains(the_point):
+                co2_short_tons += plant_row["CO2 (short tons)" ]
+
+        co2_list.append(co2_short_tons)
         
 
-    fig = px.scatter(df, x="year", y="lifeExp", title = "graph boi")
+    fig = px.scatter(x=co2_list, y=storage_list, title = "graph boi")
     return fig
 
 def barboiz():
@@ -88,10 +109,10 @@ layout = html.Div([
         ]),
         dbc.Row([
             dbc.Col(html.Div(
-                dcc.Graph(figure=barboiz())
+                dcc.Graph(figure=scatterboiz())
             )),
             dbc.Col(html.Div(
-                dcc.Graph(figure=lineboiz())
+                dcc.Graph(figure=barboiz())
             )),
         ]),
         dbc.Row([

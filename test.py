@@ -32,26 +32,33 @@ dfs = load_dfs(os.path.join("Data", "lightweight_config.json"))
 df_basin = dfs['Sedimentary Basins'].df
 df_emission = dfs['EPA Power Plants'].df
 
+exp_basin = df_basin.explode()
+
 
 co2_list = []
 storage_list = []
 
-for index, basin_row in df_basin.iterrows():
+for index, basin_row in exp_basin.iterrows():
     co2_short_tons = 0.0
-    storage_list.append(basin_row[''])
+    storage_list.append(basin_row['Storage'])
     
     coords = basin_row['geometry']
+    
     poly = Polygon(coords)
+
 
     for index, plant_row in df_emission.iterrows():
         lat= plant_row["Facility Latitude"]
         lon = plant_row["Facility Longitude"]
+        #print(lat, lon)
         the_point = Point(lon, lat)
 
-        if poly.contains(the_point):
+        '''if poly.contains(the_point):
             co2_short_tons += plant_row["CO2 (short tons)" ]
 
-    co2_list.append(co2_short_tons)
+    co2_list.append(co2_short_tons)'''
+
+
 
 
     
