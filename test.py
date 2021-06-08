@@ -51,12 +51,12 @@ for index, basin_row in exp_basin.iterrows():
         lat= plant_row["Facility Latitude"]
         lon = plant_row["Facility Longitude"]
         #print(lat, lon)
-        the_point = Point(lon, lat)
+        the_point = Point(float(lon), float(lat))
 
-        '''if poly.contains(the_point):
-            co2_short_tons += plant_row["CO2 (short tons)" ]
+        if poly.contains(the_point):
+            print(plant_row["CO2 (short tons)" ])
 
-    co2_list.append(co2_short_tons)'''
+    co2_list.append(co2_short_tons)
 
 
 

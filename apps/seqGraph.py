@@ -69,10 +69,10 @@ def scatterboiz():
         for index, plant_row in df_emission.iterrows():
             lat= plant_row["Facility Latitude"]
             lon = plant_row["Facility Longitude"]
-            the_point = Point(lon, lat)
+            the_point = Point(float(lon), float(lat))
 
             if poly.contains(the_point):
-                co2_short_tons += plant_row["CO2 (short tons)" ]
+                co2_short_tons += float(plant_row["CO2 (short tons)" ])
 
         co2_list.append(co2_short_tons)
         
