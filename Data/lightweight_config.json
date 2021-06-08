@@ -9,7 +9,7 @@
             "loncol": "Facility Longitude",
             "attributes_to_display":  [ 
                 "State", "Facility name", "Facility ID (ORISPL)", "Year", 
-                "CO2 (short tons)" 
+                "CO2 (Mt)"
             ]
         },
         {
@@ -52,16 +52,6 @@
             "loncol": "N/A",
             "attributes_to_display": ["SURVEY_ID", "CONTRIBUTOR", "DATA_TYPE", 
                 "YEAR", "PLAN_AREAS", "IDENTIFIERS"
-                
-            ]
-        },
-        {
-            "name": "EIA Biodiesel Plants",
-            "file": "Biodiesel_Plants_US_EIA.zip",
-            "file_type": "shp",
-            "latcol": "Latitude",
-            "loncol": "Longitude",
-            "attributes_to_display": ["Company", "State", "Period", "Source"
                 
             ]
         },
@@ -128,19 +118,6 @@
                 "STR_NUMBER", "COMPLEX_ID", "STR_NAME", 
                 "INSTALL_DA", "REMOVAL_DA"
                 
-            ]
-        },
-        {
-            "name": "EIA Power Plants",
-            "file": "PowerPlants_US_EIA.zip",
-            "file_type": "shp",
-            "latcol": "N/A",
-            "loncol": "N/A",
-            "attributes_to_display": [ 
-                "Plant_Code", "Plant_Name", "sector_nam", "City", "County", 
-                "StateName", "Zip", "Street_Add", "PrimSource", "Install_MW", 
-                "Total_MW", "Crude_MW", "Bio_MW", "Geo_MW", "source_des", "tech_desc", 
-                "Source", "Period"
             ]
         },
         {
