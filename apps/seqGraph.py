@@ -26,32 +26,83 @@ import os
 
 
 dfs = load_dfs(os.path.join("Data", "lightweight_config.json"))
-traces = get_traces_from_dfs(dfs)
+basins = dfs['Sedimentary Basins'].df
+basin_names = basins.Name.unique()
 
-fig = go.Figure()
+def map():
+    traces = get_traces_from_dfs(dfs)
 
-for trace in traces:
-    fig.add_trace(trace)
+    fig = go.Figure()
 
-fig.update_layout(mapbox_style="open-street-map")
-fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
-fig.update_layout(autosize=True)
-fig.update_mapboxes(center=go.layout.mapbox.Center(lat=40, lon=-99), zoom=3)
+    for trace in traces:
+        fig.add_trace(trace)
 
-fig.update_layout(
-    legend=dict(
-        x=1,
-        y=0.9,
-        traceorder="normal",
-        font=dict(
-            family="Georgia",
-            size=18,
-            color="#21314D"
+    fig.update_layout(mapbox_style="open-street-map")
+    fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
+    fig.update_layout(width=1200)
+    fig.update_mapboxes(center=go.layout.mapbox.Center(lat=40, lon=-99), zoom=3)
+
+    fig.update_layout(
+        legend=dict(
+            x=1,
+            y=0.9,
+            traceorder="normal",
+            font=dict(
+                family="Georgia",
+                size=18,
+                color="#21314D"
+            )
         )
     )
-)
+    return fig
+
+
+'''
+def boxboiz():
+    df_basin = dfs['Sedimentary Basins'].df
+    df_emission = dfs['EPA Power Plants'].df
+
+    exp_basin = df_basin.explode()   
+
+    basinFrames = {}
+
+    for index, basin_row in exp_basin.iterrows():
+        plants_per_basin = []
+        emission_per_plant = []
+        
+        coords = basin_row['geometry']
+        poly = Polygon(coords)
+  
+        for index, plant_row in df_emission.iterrows():
+            lat= plant_row["Facility Latitude"]
+            lon = plant_row["Facility Longitude"]
+            the_point = Point(float(lon), float(lat))
+
+            if poly.contains(the_point) and float(plant_row["CO2 (short tons)" ]) > 0.0:
+
+                plants_per_basin.append(plant_row['Facility Name'])
+                emission_per_plant.append(plant_row['CO2 (short tons)'])
+
+        columns = ['PlantName', 'Emissions']
+        df = pd.DataFrame(columns=columns)
+        df['PlantName'] = plants_per_basin
+        df['Emissions'] = emission_per_plant
+
+        basinFrames[basin_row['Name']] = df
+    
+    fig = px.box(basinFrames["Denver Basin"], y="Emissions", title = "graph boi")
+    return fig
+    '''
 
 def scatterboiz():
+    df = plants_per_basin()
+    fig = px.scatter(df, x='Emissions', y='Storage', 
+            title = "graph boi",
+            hover_data=['Name', 'Storage', 'Emissions'])
+
+    return fig
+
+def plants_per_basin():
     df_basin = dfs['Sedimentary Basins'].df
     df_emission = dfs['EPA Power Plants'].df
 
@@ -86,45 +137,13 @@ def scatterboiz():
     df['Name'] = names
     df['Emissions'] = co2_list
     df['Storage'] = storage_list
-    fig = px.scatter(df, x='Emissions', y='Storage', 
-            title = "graph boi",
-            hover_data=['Name', 'Storage', 'Emissions'])
 
-    return fig
-
+    return df
 def barboiz():
-    df_basin = dfs['Sedimentary Basins'].df
-    df_emission = dfs['EPA Power Plants'].df
-
-    exp_basin = df_basin.explode()   
-
-    basinFrames = {}
-
-    for index, basin_row in exp_basin.iterrows():
-        plants_per_basin = []
-        emission_per_plant = []
-        
-        coords = basin_row['geometry']
-        poly = Polygon(coords)
-  
-        for index, plant_row in df_emission.iterrows():
-            lat= plant_row["Facility Latitude"]
-            lon = plant_row["Facility Longitude"]
-            the_point = Point(float(lon), float(lat))
-
-            if poly.contains(the_point) and float(plant_row["CO2 (short tons)" ]) > 0.0:
-
-                plants_per_basin.append(plant_row['Facility Name'])
-                emission_per_plant.append(plant_row['CO2 (short tons)'])
-
-        columns = ['PlantName', 'Emissions']
-        df = pd.DataFrame(columns=columns)
-        df['PlantName'] = plants_per_basin
-        df['Emissions'] = emission_per_plant
-
-        basinFrames[basin_row['Name']] = df
-    
-    fig = px.box(basinFrames["Denver Basin"], y="Emissions", title = "graph boi")
+    df = plants_per_basin()
+    fig = px.bar(df, x='Name', y=['Emissions','Storage'], 
+            title = "graph boi"
+            )
     return fig
 '''
 Layout for Page 1 hosts map object and general overview
@@ -144,21 +163,45 @@ layout = html.Div([
                     , className="mb-4")
         ]),
         dbc.Row([
-            dcc.Graph(
-                id='northAmericanMap',
-                figure=fig,
-            )
+            dcc.Graph(figure=map())
         ]),
         dbc.Row([
             dbc.Col(html.Div(
                 dcc.Graph(figure=scatterboiz())
             )),
-            dbc.Col(html.Div(
+            dbc.Col(html.Div([
+                dcc.Dropdown(
+                    id="dropdown",
+                    options=[{"label": x, "value": x} for x in basin_names],
+                    value=basin_names[0],
+
+                ),
                 dcc.Graph(figure=barboiz())
-            )),
+            ])),
         ]),
         dbc.Row([
             dcc.Link('About', href='/apps/about')
         ])      
     ])
 ])
+
+'''@app.callback(
+    Output("bar_graph", "figure"), 
+    [Input("dropdown", "value")])
+def barboiz(name):
+    df = plants_per_basin()
+    mask = df["Name"] == name
+    df = plants_per_basin()
+    fig = px.bar(df[mask], x='Name', y=['Emissions','Storage'], 
+            title = "graph boi",
+            clearable=False,
+            )
+
+    return fig'''
+
+
+
+'''log 10 dataset
+stacked bar chart, normalized emission type coal, gas ....
+light gray backround for basins'''
+
