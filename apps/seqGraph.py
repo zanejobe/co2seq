@@ -97,7 +97,7 @@ def boxboiz():
 def scatterboiz():
     df = plants_per_basin()
     fig = px.scatter(df, x='Emissions', y='Storage', 
-            title = "graph boi",
+            title = "US Basin Sequestration Potential",
             hover_data=['Name', 'Storage', 'Emissions'])
 
     return fig
@@ -139,10 +139,11 @@ def plants_per_basin():
     df['Storage'] = storage_list
 
     return df
+
 def barboiz():
     df = plants_per_basin()
     fig = px.bar(df, x='Name', y=['Emissions','Storage'], 
-            title = "graph boi"
+            title = "Basin Sequestraion Overview"
             )
     return fig
 '''
@@ -191,10 +192,7 @@ layout = html.Div([
 def barboiz(name):
     df = plants_per_basin()
     mask = df["Name"] == name
-    df = plants_per_basin()
-    fig = px.bar(df[mask], x='Name', y=['Emissions','Storage'], 
-            title = "graph boi",
-            clearable=False,
+    fig = px.bar(df[mask], x='Name', y=['Emissions','Storage']
             )
 
     return fig'''
