@@ -5,7 +5,12 @@ import geopandas as gpd
 import json
 import plotly
 
+
 def lat_lon_lists_from_df(df, hover_strings):
+    '''
+        Converts a dataframe's geometry into plottable lists of lat, lon, and hover_strings
+        to be used by plotly
+    '''
     lats = []
     lons = []
     new_hover_strings = []
@@ -34,36 +39,33 @@ def lat_lon_lists_from_df(df, hover_strings):
             new_hover_strings.append(None)
     return lats, lons, new_hover_strings
 
-class DataFrameInfo:
-    def __init__(self, lat_col, lon_col, extension, df, hover_columns):
-        self.lat_col = lat_col
-        self.lon_col = lon_col
-        self.extension = extension
-        self.df = df
-        self.hover_columns = hover_columns
-
 def load_dfs(config_path, data_dir="Data"):
+    '''
+        Load all files in config into GeoPandas dataframes
+    '''
     dfs = {}
     f = open(config_path)
     config = json.load(f)
-    for config_df in config['dataframes']:
-        df_key = config_df["name"]
-        df_file = os.path.join(data_dir, config_df["file"])
+    for conf in config['dataframes']:
+        df_file = os.path.join(data_dir, conf["file"])
         try:
             df = gpd.read_file(df_file)
-            dfs[df_key] = DataFrameInfo(lat_col=config_df["latcol"],
-                                        lon_col=config_df["loncol"],
-                                        extension=config_df["file_type"],
-                                        hover_columns=config_df["attributes_to_display"],
-                                        df=df)
+
+            if conf["file_type"] == "csv":
+                df = df[df[conf["latcol"]] != ""]
+                df = df[df[conf["loncol"]] != ""]
+                df.geometry = gpd.points_from_xy(df[conf["latcol"]], df[conf["loncol"]])
+
+            df["hover"] = get_hover_string_list(df, conf["attributes_to_display"])
+            dfs[conf["name"]] = df
         except:
             raise Exception(f"Could not construct df from {df_file}")
     return dfs
 
-def get_hover_string_list(df, title, hover_columns):
+def get_hover_string_list(df, hover_columns):
     result = []
     for index, row in df.iterrows():
-        s = f"{title}<br>"
+        s = ""
         for col in hover_columns:
             if col in row:
                 s += f"{col} = {row[col]}<br>"
@@ -74,45 +76,34 @@ def get_traces_from_dfs(dfs):
     traces = []
     colors = plotly.colors.qualitative.Dark24
     counter = 1
-    for df_name, df_info in dfs.items():
-        df = df_info.df
-        extension = df_info.extension
-        hover_labels = get_hover_string_list(df, df_name, df_info.hover_columns)
-        if extension == "csv":
-            traces.append(go.Scattermapbox(name=df_name,
-                                           visible="legendonly",
+    for name, df in dfs.items():
+        if isinstance(df.geometry[0], shapely.geometry.linestring.LineString) \
+                            or isinstance(df.geometry[0], shapely.geometry.multilinestring.MultiLineString):
+            lats, lons, hover_labels = lat_lon_lists_from_df(df, df["hover"])
+            traces.append(go.Scattermapbox(name=name,
                                            hovertext=hover_labels,
-                                           lat=df[df_info.lat_col], lon=df[df_info.lon_col],
+                                           visible="legendonly",
+                                           lon=lons, lat=lats,
+                                           mode='lines',
+                                           line=dict(width=1, color=colors[counter % len(colors)])))
+            counter += 1
+        elif isinstance(df.geometry[0], shapely.geometry.point.Point):
+            traces.append(go.Scattermapbox(name=name,
+                                           hovertext=df["hover"],
+                                           visible="legendonly",
+                                           lat=df.geometry.y, lon=df.geometry.x,
                                            marker={'color': colors[counter % len(colors)], 'size': 5, 'opacity': 0.6}))
             counter += 1
-        if extension == "shp" or extension == "gdb":
-            if isinstance(df.geometry[0], shapely.geometry.linestring.LineString) \
-                                or isinstance(df.geometry[0], shapely.geometry.multilinestring.MultiLineString):
-                lats, lons, hover_labels = lat_lon_lists_from_df(df, hover_labels)
-                traces.append(go.Scattermapbox(name=df_name,
-                                               hovertext=hover_labels,
-                                               visible="legendonly",
-                                               lon=lons, lat=lats,
-                                               mode='lines',
-                                               line=dict(width=1, color=colors[counter % len(colors)])))
-                counter += 1
-            elif isinstance(df.geometry[0], shapely.geometry.point.Point):
-                traces.append(go.Scattermapbox(name=df_name,
-                                               hovertext=hover_labels,
-                                               visible="legendonly",
-                                               lat=df.geometry.y, lon=df.geometry.x,
-                                               marker={'color': colors[counter % len(colors)], 'size': 5, 'opacity': 0.6}))
-                counter += 1
-            elif isinstance(df.geometry[0], shapely.geometry.polygon.Polygon):
-                lats, lons, hover_labels = lat_lon_lists_from_df(df, hover_labels)
-                traces.append(go.Scattermapbox(name=df_name,
-                                               hovertext=hover_labels,
-                                               visible="legendonly",
-                                               fill="toself",
-                                               lon=lons, lat=lats,
-                                               mode='lines',
-                                               line=dict(width=1, color=colors[counter % len(colors)])))
-                counter += 1
-            else:
-                raise Exception(f"The geometry in {df_name} is not supported")
+        elif isinstance(df.geometry[0], shapely.geometry.polygon.Polygon):
+            lats, lons, hover_labels = lat_lon_lists_from_df(df, df["hover"])
+            traces.append(go.Scattermapbox(name=name,
+                                           hovertext=hover_labels,
+                                           visible="legendonly",
+                                           fill="toself",
+                                           lon=lons, lat=lats,
+                                           mode='lines',
+                                           line=dict(width=1, color=colors[counter % len(colors)])))
+            counter += 1
+        else:
+            raise Exception(f"The geometry in {name} is not supported")
     return traces
