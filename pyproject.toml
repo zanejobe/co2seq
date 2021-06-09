@@ -1,3 +1,5 @@
+#local install of pytest and dash[testing]...sorry
+
 [tool.poetry]
 name = "dash_test"
 version = "0.1.0"
