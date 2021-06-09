@@ -126,7 +126,7 @@ def plants_per_basin():
             lon = plant_row["Facility Longitude"]
             the_point = Point(float(lon), float(lat))
 
-            if poly.contains(the_point) and float(plant_row["CO2 (short tons)" ]) > 0.0:
+            if poly.contains(the_point) and float(plant_row["CO2 (Mt)" ]) > 0.0:
                 co2_short_tons += float(plant_row["CO2 (short tons)" ])
 
         if co2_short_tons > 0.0 and basin_row['Storage'] > 0.0:
