@@ -11,8 +11,6 @@ from dash.dependencies import Input, Output, State
 import geopandas as gpd
 import pandas as pd
 
-import dash_leaflet as dl
-import dash_leaflet.express as dlx
 from dash import Dash
 from dash.dependencies import Output, Input
 from dash_extensions.javascript import arrow_function
