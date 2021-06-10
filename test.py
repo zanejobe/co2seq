@@ -16,7 +16,7 @@ from dash import Dash
 from dash.dependencies import Output, Input
 from dash_extensions.javascript import arrow_function
 
-from app import app
+#from app import app
 from utils import *
 import os
 
@@ -66,12 +66,12 @@ def plants_per_basin():
     return df
 '''def barboiz():
     df = plants_per_basin()
-    #mask = df["name"] == name
+    mask = df[df["name"] == 'Denver Basin']
     #df = plants_per_basin()
-    fig = px.bar(df["Denver Basin"], x="name", y="emissions",
+    fig = px.bar(mask, x="name", y="emissions",
             barmode="group")
 
-    return fig
+    return fig'''
 
 app = dash.Dash(__name__)
 
@@ -82,24 +82,22 @@ app.layout = html.Div([
         value=basin_names[0],
         clearable=False,
     ),
-    dcc.Graph(id="bar-graph",
-            figure=barboiz())
-])'''
+    dcc.Graph(id="bar-graph"),
+])
 
-'''@app.callback(
+@app.callback(
     Output("bar-graph", "figure"), 
-    [Input("dropdown", "value")])'''
-'''def barboiz():
+    [Input("dropdown", "value")])
+def barboiz(name):
     df = plants_per_basin()
-    #mask = df["name"] == name
-    #df = plants_per_basin()
-    fig = px.bar(df["Denver Basin"], x="names", y="emissions",
-            barmode="group")
+    mask = df[df["name"] == "Denver Basin"]
+    fig = px.bar(mask, x="names", y=["emissions", "storage"])
 
     return fig
 
-app.run_server(debug=True)'''
+app.run_server(debug=True)
 
+'''df = plants_per_basin()
+new_df = df[df["name"] == 'Denver Basin']
 
-
-print(plants_per_basin()["name"] == 'Denver Basin')
+print(new_df)'''
