@@ -3,7 +3,7 @@
     "dataframes": [
         {
             "name": "Sedimentary Basins",
-            "file": "SedimentaryBasinsUS.zip",
+            "file": "NewSedimentaryBasinsUS.zip",
             "file_type": "shp",
             "latcol": "N/A",
             "loncol": "N/A",
