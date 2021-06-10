@@ -25,6 +25,7 @@ import os
 dfs = load_dfs(os.path.join("Data", "lightweight_config.json"))
 basins = dfs['Sedimentary Basins'].df
 basin_names = basins.Name.unique()
+basin_names.sort()
 
 
 def map():
@@ -64,7 +65,7 @@ def plants_per_basin():
     storage_list = []
     names = []
 
-    columns = ['Name', 'Emissions', 'Storage']
+    columns = ['name', 'emissions', 'storage']
     df = pd.DataFrame(columns=columns)
 
     for index, basin_row in exp_basin.iterrows():
@@ -79,32 +80,30 @@ def plants_per_basin():
             the_point = Point(float(lon), float(lat))
 
             if poly.contains(the_point) and float(plant_row["CO2 (Mt)" ]) > 0.0:
-                co2_mega_tons += float(plant_row["CO2 (short tons)" ])
+                co2_mega_tons += float(plant_row["CO2 (Mt)" ])
 
         if co2_mega_tons > 0.0 and basin_row['Storage'] > 0.0:
             names.append(basin_row['Name'])
             storage_list.append(basin_row['Storage'])
             co2_list.append(co2_mega_tons)
         
-    df['Name'] = names
-    df['Emissions'] = co2_list
-    df['Storage'] = storage_list
+    df['name'] = names
+    df['emissions'] = co2_list
+    df['storage'] = storage_list
 
     return df
 
 df = plants_per_basin()
 
 def scatterboiz():
-    fig = px.scatter(df, x='Emissions', y='Storage', 
-            title = "graph boi",
-            hover_data=['Name', 'Storage', 'Emissions'])
+    fig = px.scatter(df, x='emissions', y='storage', 
+            hover_data=['name', 'storage', 'emissions'], 
+            log_x=True, log_y=True, 
+            labels={
+                "emissions" : "Emissions (Mt)",
+                "storage"   : "Storage (Mt)"
+            })
 
-    return fig
-
-def barboiz():
-    fig = px.bar(df, x='Name', y=['Emissions','Storage'], 
-            title = "graph boi"
-            )
     return fig
 
 '''
@@ -120,7 +119,7 @@ layout = html.Div([
         ]),
 
         dbc.Row([
-            dbc.Col(dbc.Card(html.H3(children='Map',
+            dbc.Col(dbc.Card(html.H3(children="Us Map of Geological Features",
                                      className="text-center text-light bg-dark"), body=True, color="dark")
                     , className="mb-4")
         ]),
@@ -128,10 +127,14 @@ layout = html.Div([
             dcc.Graph(figure=map())
         ]),
         dbc.Row([
-            dbc.Col(html.Div(
-                dcc.Graph(figure=scatterboiz())
-            )),
             dbc.Col(html.Div([
+                html.H3("Basin Sequestration Potential"),
+                html.H6("Scatterplot with log scale applied to x and y axis displaying all basins with their total storage and emission data."),
+                dcc.Graph(figure=scatterboiz()),
+            ])),
+            dbc.Col(html.Div([
+                html.H3("Basin Storage v. Emissions"),
+                html.H6("Bar Chart per selected basin, displaying total Storage vs. Emission data."),
                 dcc.Dropdown(
                     id="dropdown",
                     options=[{"label": x, "value": x} for x in basin_names],
@@ -155,4 +158,10 @@ Creating callback functions for bar graphs
 def barboiz(name):
     mask = df[df["name"] == name]
     fig = px.bar(mask, x="name", y=["emissions", "storage"], 
-                barmode='group')
+            barmode='group',
+            labels={
+                "name"      : "Selected Basin",
+                "emissions" : "Emissions (Mt)",
+                "storage"   : "Storage (Mt)"
+            })
+    return fig
