@@ -9,6 +9,7 @@ plotly_args = {
     "polygon": {"mode": "lines", "fill": "toself"}
 }
 
+
 def load_dfs(config_path, data_dir="Data"):
     '''
         Load all files in config into GeoPandas dataframes
@@ -60,6 +61,7 @@ def get_traces_from_dfs(dfs):
             raise Exception(f"The geometry in {name} is not supported")
 
         lats, lons, hover_labels = lat_lon_lists_from_df(df)
+        # TODO: specify line thicknesses, point sizes, and colors
         traces.append(go.Scattermapbox(name=name,
                                        hovertext=hover_labels,
                                        visible="legendonly",

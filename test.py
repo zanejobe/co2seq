@@ -15,15 +15,15 @@ from dash.dependencies import Output, Input
 from dash_extensions.javascript import arrow_function
 
 from app import app
-from utils import *
+from render import load_dfs, get_traces_from_dfs
 import os
 
 from shapely.geometry import Point, Polygon
 
 dfs = load_dfs(os.path.join("Data", "lightweight_config.json"))
 
-df_basin = dfs['Sedimentary Basins'].df
-df_emission = dfs['EPA Power Plants'].df
+df_basin = dfs['Sedimentary Basins']
+df_emission = dfs['EPA Power Plants']
 
 exp_basin = df_basin.explode()   
 
