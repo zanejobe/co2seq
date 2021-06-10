@@ -27,6 +27,7 @@ basins = dfs['Sedimentary Basins'].df
 basin_names = basins.Name.unique()
 
 
+
 def plants_per_basin():
     df_basin = dfs['Sedimentary Basins'].df
     df_emission = dfs['EPA Power Plants'].df
@@ -72,7 +73,7 @@ def plants_per_basin():
             barmode="group")
 
     return fig'''
-
+df = plants_per_basin()
 app = dash.Dash(__name__)
 
 app.layout = html.Div([
@@ -89,9 +90,9 @@ app.layout = html.Div([
     Output("bar-graph", "figure"), 
     [Input("dropdown", "value")])
 def barboiz(name):
-    df = plants_per_basin()
-    mask = df[df["name"] == "Denver Basin"]
-    fig = px.bar(mask, x="names", y=["emissions", "storage"])
+    mask = df[df["name"] == name]
+    fig = px.bar(mask, x="name", y=["emissions", "storage"], 
+                barmode='group')
 
     return fig
 

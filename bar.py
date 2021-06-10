@@ -7,7 +7,7 @@ import plotly.express as px
 df = px.data.tips()
 days = df.day.unique()
 
-'''app = dash.Dash(__name__)
+app = dash.Dash(__name__)
 
 app.layout = html.Div([
     dcc.Dropdown(
@@ -28,6 +28,6 @@ def update_bar_chart(day):
                  color="smoker", barmode="group")
     return fig
 
-app.run_server(debug=True)'''
+app.run_server(debug=True)
 
 print(df.dtypes)
