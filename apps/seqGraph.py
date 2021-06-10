@@ -55,7 +55,7 @@ def map():
 
 def plants_per_basin():
     df_basin = dfs['Sedimentary Basins']
-    df_emission = dfs['EPA Power Plants']
+    df_emission = dfs['EPA Power Plant Emissions']
 
     exp_basin = df_basin.explode()
 
