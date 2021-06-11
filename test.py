@@ -1,65 +1,52 @@
-import plotly.graph_objects as go
-import plotly.express as px
-from plotly.offline import plot
+'''import plotly.graph_objects as go
 
-import dash
-import dash_core_components as dcc
-import dash_html_components as html
-import dash_bootstrap_components as dbc
-from dash.dependencies import Input, Output, State
-import geopandas as gpd
-import pandas as pd
+# Generate example data
+import numpy as np
+np.random.seed(1)
 
-from dash import Dash
-from dash.dependencies import Output, Input
-from dash_extensions.javascript import arrow_function
+x = np.random.uniform(low=3, high=6, size=(500,))
+y = np.random.uniform(low=3, high=6, size=(500,))
 
-from app import app
-from render import load_dfs, get_traces_from_dfs
-import os
+# Build figure
+fig = go.Figure()
 
-from shapely.geometry import Point, Polygon
+# Add scatter trace with medium sized markers
+fig.add_trace(
+    go.Scatter(
+        mode='markers',
+        x=x,
+        y=y,
+        marker=dict(
+            color='LightSkyBlue',
+            size=20,
+            
+            line=dict(
+                color='MediumPurple',
+                width=2
+            )
+        ),
+        showlegend=False
+    )
+)
 
-dfs = load_dfs(os.path.join("Data", "lightweight_config.json"))
+# Add trace with large marker
+fig.add_trace(
+    go.Scatter(
+        mode='markers',
+        x=[2],
+        y=[4.5],
+        marker=dict(
+            color='LightSkyBlue',
+            size=120,
+            line=dict(
+                color='MediumPurple',
+                width=12
+            )
+        ),
+        showlegend=False
+    )
+)
 
-df_basin = dfs['Sedimentary Basins']
-df_emission = dfs['EPA Power Plants']
-
-exp_basin = df_basin.explode()   
-
-basinFrames = {}
-
-for index, basin_row in exp_basin.iterrows():
-    plants_per_basin = []
-    emission_per_plant = []
-    
-    coords = basin_row['geometry']
-    poly = Polygon(coords)
-
-    for index, plant_row in df_emission.iterrows():
-        lat= plant_row["Facility Latitude"]
-        lon = plant_row["Facility Longitude"]
-        the_point = Point(float(lon), float(lat))
-
-        if poly.contains(the_point) and float(plant_row["CO2 (short tons)" ]) > 0.0:
-
-            print(plant_row)
-
-            plants_per_basin.append(plant_row["Facility Name"])
-            emission_per_plant.append(plant_row['CO2 (short tons)'])
-
-    columns = ['PlantName', 'Emissions']
-    df = pd.DataFrame(columns=columns)
-    df['PlantName'] = plants_per_basin
-    df['Emissions'] = emission_per_plant
-
-    basinFrames[basin_row['Name']] = df
-
-fig = px.box(basinFrames.keys()[0], y="Emissions", title = "graph boi")
-
-fig.show()
-
-
-    
+fig.show()'''
     
     

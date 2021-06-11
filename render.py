@@ -77,13 +77,23 @@ def get_traces_from_dfs(config_path, dfs):
 
         lats, lons, hover_labels = lat_lon_lists_from_df(df)
         # TODO: specify line thicknesses, point sizes, and colors
-        traces.append(go.Scattermapbox(name=name,
+
+        if name == "Sedimentary Basins":
+            traces.append(go.Scattermapbox(name=name,
                                        hovertext=hover_labels,
                                        visible="legendonly",
                                        lon=lons, lat=lats,
-                                       #marker_type=conf["marker"],
+                                       marker=dict(color='rgba(172,177,180, 0.6)'),
                                        mode=plotly_args[key]["mode"],
                                        fill=plotly_args[key]["fill"]))
+
+        else:
+            traces.append(go.Scattermapbox(name=name,
+                                        hovertext=hover_labels,
+                                        visible="legendonly",
+                                        lon=lons, lat=lats,
+                                        mode=plotly_args[key]["mode"],
+                                        fill=plotly_args[key]["fill"]))
     return traces
 
 

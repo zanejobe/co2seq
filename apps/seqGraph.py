@@ -30,19 +30,19 @@ def map():
     traces = get_traces_from_dfs(os.path.join("Data", "lightweight_config.json"), dfs)
 
     fig = go.Figure()
-
+    
     for trace in traces:
         fig.add_trace(trace)
 
     fig.update_layout(mapbox_style="open-street-map")
     fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
-    fig.update_layout(width=1200)
+    fig.update_layout(autosize=True)
     fig.update_mapboxes(center=go.layout.mapbox.Center(lat=40, lon=-99), zoom=3)
 
     fig.update_layout(
         legend=dict(
             x=1,
-            y=0.9,
+            y=0.7,
             traceorder="normal",
             font=dict(
                 family="Georgia",
@@ -53,45 +53,8 @@ def map():
     )
     return fig
 
-def plants_per_basin():
-    df_basin = dfs['Sedimentary Basins']
-    df_emission = dfs['EPA Power Plant Emissions']
 
-    exp_basin = df_basin.explode()
-
-    co2_list = []
-    storage_list = []
-    names = []
-
-    columns = ['name', 'emissions', 'storage']
-    df = pd.DataFrame(columns=columns)
-
-    for index, basin_row in exp_basin.iterrows():
-        co2_mega_tons = 0.0
-        
-        coords = basin_row['geometry']
-        poly = Polygon(coords)
-
-        for index, plant_row in df_emission.iterrows():
-            lat= plant_row["Facility Latitude"]
-            lon = plant_row["Facility Longitude"]
-            the_point = Point(float(lon), float(lat))
-
-            if poly.contains(the_point) and float(plant_row["CO2 (Mt)" ]) > 0.0:
-                co2_mega_tons += float(plant_row["CO2 (Mt)" ])
-
-        if co2_mega_tons > 0.0 and basin_row['TA_Storage'] > 0.0:
-            names.append(basin_row['Name'])
-            storage_list.append(basin_row['TA_Storage'])
-            co2_list.append(co2_mega_tons)
-        
-    df['name'] = names
-    df['emissions'] = co2_list
-    df['storage'] = storage_list
-
-    return df
-
-df = plants_per_basin()
+df = pd.read_csv("Data/plants_per_basin.csv")
 basin_names = df.name.unique()
 basin_names.sort()
 
@@ -103,7 +66,6 @@ def scatterboiz():
                 "emissions" : "Emissions (Mt)",
                 "storage"   : "Storage (Mt)"
             })
-
     return fig
 
 '''
@@ -119,36 +81,48 @@ layout = html.Div([
         ]),
 
         dbc.Row([
-            dbc.Col(dbc.Card(html.H3(children="Us Map of Geological Features",
-                                     className="text-center text-light bg-dark"), body=True, color="dark")
-                    , className="mb-4")
-        ]),
+            dbc.Col(dbc.Card(
+                [
+                    dbc.CardBody(html.H3("US Map of Sequestration Features", className="card-title"))
+                     
+                ])),
+            ]),
         dbc.Row([
-            dcc.Graph(figure=map())
-        ]),
-        dbc.Row([
-            dbc.Col(html.Div([
-                html.H3("Basin Sequestration Potential"),
-                html.H6("Scatterplot with log scale applied to x and y axis displaying all basins with their total storage and emission data."),
-                dcc.Graph(figure=scatterboiz()),
-            ])),
-            dbc.Col(html.Div([
-                html.H3("Basin Storage v. Emissions"),
-                html.H6("Bar Chart per selected basin, displaying total Storage vs. Emission data."),
-                dcc.Dropdown(
-                    id="dropdown",
-                    options=[{"label": x, "value": x} for x in basin_names],
-                    value=basin_names[0],
-
-                ),
-                dcc.Graph(id="bar-graph")
-            ])),
-        ]),
-        dbc.Row([
-            dcc.Link('About', href='/apps/about')
-        ])      
-    ])
+            dcc.Graph(figure=map(), style={"height" : "40%", "width" : "90%"})
+            ]),
+        dbc.Row(children=
+            [
+                dbc.Col(dbc.Card([
+                    dbc.CardBody([
+                        html.H4("Basin Sequestration Potential", className="card-title"), 
+                        html.P("Scatterplot with log scale applied to x and y axis displaying all basins with their total storage and emission data.", className="card-text")]),
+                ])),
+                dbc.Col(dbc.Card([
+                    dbc.CardBody([
+                        html.H4("Basin Storage v. Emissions", className="card-title"), 
+                        html.P("Bar Chart per selected basin, displaying total Storage vs. Emission data.", className="card-text")]),
+                    dbc.CardFooter(
+                        dcc.Dropdown(
+                            id="dropdown",
+                            options=[{"label": x, "value": x} for x in basin_names],
+                            value=basin_names[0],
+                        ) 
+                    ),
+                ]))
+            ]),
+        dbc.Row(children=
+            [
+                dbc.Col(html.Div([
+                    dcc.Graph(figure=scatterboiz()),
+                ])),
+                dbc.Col(html.Div([
+                    dcc.Graph(id="bar-graph"),
+                ]))
+            ]),    
+    ], fluid=True)
 ])
+
+
 '''
 Creating callback functions for bar graphs
 '''
@@ -158,10 +132,6 @@ Creating callback functions for bar graphs
 def barboiz(name):
     mask = df[df["name"] == name]
     fig = px.bar(mask, x="name", y=["emissions", "storage"], 
-            barmode='group',
-            labels={
-                "name"      : "Selected Basin",
-                "emissions" : "Emissions (Mt)",
-                "storage"   : "Storage (Mt)"
-            })
+            barmode='group', height=400
+            )
     return fig

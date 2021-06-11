@@ -9,16 +9,6 @@ from app import server
 # Connect to your app pages
 from apps import seqGraph, about
 
-
-'''app.layout = html.Div([
-    dcc.Location(id='url', refresh=False),
-    html.Div([
-        dcc.Link('Geo Map | ', href='/apps/seqGraph'),
-        dcc.Link('About', href='/apps/about'),
-    ], className="row"),
-    html.Div(id='page-content', children=[])
-])'''
-
 app.layout = html.Div([
     dcc.Location(id='url', refresh=False),
     html.Div(id='page-content', children=[])
