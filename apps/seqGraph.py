@@ -29,7 +29,7 @@ basin_names.sort()
 
 
 def map():
-    traces = get_traces_from_dfs(dfs)
+    traces = get_traces_from_dfs(os.path.join("Data", "lightweight_config.json"), dfs)
 
     fig = go.Figure()
 
