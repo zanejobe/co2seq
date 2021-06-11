@@ -2,7 +2,7 @@
 {
     "dataframes": [
         {
-            "name": "Sedimentary Basins",
+            "name": "Sedimentary Basins 2012",
             "file": "NewSedimentary_BasinsUS.zip",
             "file_type": "shp",
             "latcol": "N/A",
@@ -12,7 +12,7 @@
             ]
         },
         {
-            "name": "EPA Power Plant Facility Info",
+            "name": "EPA Power Plant Facility Info 2020",
             "file": "facility_06-10-2021_170833518.csv",
             "file_type": "csv",
             "latcol": "Facility Latitude",
@@ -26,7 +26,7 @@
             ]
         },
         {
-            "name": "EPA Power Plant Emissions",
+            "name": "EPA Power Plant Annual Emissions 2020",
             "file": "emission_06-10-2021_164726740.csv",
             "file_type": "csv",
             "latcol": "Facility Latitude",
@@ -56,7 +56,7 @@
             "latcol": "Latitude",
             "loncol": "Longitude",
             "attributes_to_display": [
-                "Company", "State", "Period", "Source"
+                "Company", "State", "Cap_Mmgal"
             ]
         },
         {
@@ -76,22 +76,27 @@
             "latcol": "LAT",
             "loncol": "LONG_",
             "attributes_to_display": [
-                "SN_FORMSAND", "SAND_NAME", "SDDATE","SDYEAR","WELLAPI", "FDDATE", 
-                "FDYEAR", "Original_Oil", "Original_Gas", "Cum_Oil", "Cum_Gas", 
-                "Oil_Reserves","Gas_Reserves", "PERMEABILITY", "YIELD"
+                "SN_FORMSAND", "SAND_NAME", "SDDATE","WELLAPI", 
+                "BOEM_FIELD", "FDDATE", "FDYEAR", "SAND", "PLAY_NAME", 
+                "CHRONOZONE", "PLAY_TYPE", "SD_TYPE", "WDEP", 
+                "Original_Oil", "Original_Gas", "Original BOE", "Cum_Oil", 
+                "Cum_Gas", "Cum BOE", "Oil_Reserves","Gas_Reserves", 
+                "BOE Reserves", "THK", "OTHK", "GTHK", "RESTYP", 
+                "POROSITY", "SW", "PERMEABILITY", "GOR", 
+                "API", "OIP"
             ]
         },
         {
-            "name": "BOEM Planned Wells",
+            "name": "BOEM Planned Wells 2021",
             "file": "plandelimit.csv",
             "file_type": "csv",
             "latcol": "LAT",
             "loncol": "LONG",
             "attributes_to_display": [
-                "PLAN_CTRL_CD", "PLAN_SITE_TYPE", 
-                "PLAN_SITE_NAME", "WATER_DEPTH", 
-                "SURF_AREA_CODE", "SURF_BLOCK_NUM", 
-                "PLAN_TYPE_CODE"
+                "PLAN_CTRL_CD", "PLAN_CTRL_NUM", "PLAN_SITE_TYPE", 
+                "PLAN_SITE_NAME", "SITE_CANCEL_DT", "PLAN_FNL_ACTN_CD",
+                "PLAN_FNL_ACTN_DT", "SURF_AREA_CODE", "SURF_BLOCK_NUM", 
+                "PLAN_TYPE_CODE", "WATER_DEPTH"
             ]
         },
         {
@@ -107,13 +112,14 @@
             ]
         },
         {
-            "name": "NETL GOM Wells",
+            "name": "NETL GOM Wells 2019",
             "file": "boreholes04082013.csv",
             "file_type": "csv",
             "latcol": "bh_sfclat",
             "loncol": "bh_sfclon",
             "attributes_to_display": [
-                "bh_api", "bh_opernum", "bh_spuddat", "bh_tddate"
+                "bh_api", "bh_wellname", "bh_opernum", "bh_spuddat", 
+                "bh_mdft", "bh_tddate", "bh_typecod", "bh_waterde"
             ]
         },
         {
@@ -127,7 +133,7 @@
             ]
         },
         {
-            "name": "EIA Oil Pipelines",
+            "name": "EIA Oil Pipelines 2020",
             "file": "CrudeOil_Pipelines_US_EIA.zip",
             "file_type": "shp",
             "latcol": "N/A",
@@ -137,7 +143,7 @@
             ]
         },
         {
-            "name": "EIA HGL Pipelines",
+            "name": "EIA HGL Pipelines 2020",
             "file": "HGL_Pipelines_US_EIA.zip",
             "file_type": "shp",
             "latcol": "N/A",
@@ -147,7 +153,7 @@
             ]
         },
         {
-            "name": "EIA NG Pipelines",
+            "name": "EIA NG Pipelines 2020",
             "file": "NaturalGas_InterIntrastate_Pipelines_US_EIA.zip",
             "file_type": "shp",
             "latcol": "N/A",
@@ -157,7 +163,7 @@
             ]
         },
         {
-            "name": "EIA Petro Pipelines",
+            "name": "EIA Petro Pipelines 2020",
             "file": "PetroleumProduct_Pipelines_US_EIA.zip",
             "file_type": "shp",
             "latcol": "N/A",
@@ -167,25 +173,25 @@
             ]
         },
         {
-            "name": "USGS 2D Seismic Data (NAMSS)",
+            "name": "USGS 2D Seismic Data (NAMSS) 2016",
             "file": "NAMSS_2D.zip",
             "file_type": "shp",
             "latcol": "N/A",
             "loncol": "N/A",
-            "attributes_to_display": ["SURVEY_ID", "CONTRIBUTOR", "DATA_TYPE", 
+            "attributes_to_display": [
+                "SURVEY_ID", "CONTRIBUTOR", "DATA_TYPE", 
                 "YEAR", "PLAN_AREAS", "IDENTIFIERS"
-                
             ]
         },
         {
-            "name": "USGS 3D Seismic Data (NAMSS)",
+            "name": "USGS 3D Seismic Data (NAMSS) 2016",
             "file": "NAMSS_3D.zip",
             "file_type": "shp",
             "latcol": "N/A",
             "loncol": "N/A",
-            "attributes_to_display": ["SURVEY_ID", "CONTRIBUTOR", "DATA_TYPE", 
-                "YEAR", "PLAN_AREAS", "IDENTIFIERS"
-                
+            "attributes_to_display": [
+                "SURVEY_ID", "CONTRIBUTOR", "DATA_TYPE", 
+                "YEAR", "PLAN_AREAS", "IDENTIFIERS"   
             ]
         }
     ]
