@@ -83,10 +83,12 @@ layout = html.Div([
         dbc.Row([
             dbc.Col(dbc.Card(
                 [
-                    dbc.CardBody(html.H3("US Map of Sequestration Features", className="card-title"))
+                    dbc.CardBody(html.H3("US Map of Sequestration Features", className="align-self-center"))
                      
-                ])),
-            ]),
+                ], color="rgb(33,49,77,0.9)", inverse=True)),
+            ], style={
+                'textAlign': 'center',
+            }),
         dbc.Row([
             dcc.Graph(figure=map(), style={"height" : "40%", "width" : "90%"})
             ]),
@@ -96,7 +98,7 @@ layout = html.Div([
                     dbc.CardBody([
                         html.H4("Basin Sequestration Potential", className="card-title"), 
                         html.P("Scatterplot with log scale applied to x and y axis displaying all basins with their total storage and emission data.", className="card-text")]),
-                ])),
+                ], color="rgb(210,73,42,0.9)", inverse=True)),
                 dbc.Col(dbc.Card([
                     dbc.CardBody([
                         html.H4("Basin Storage v. Emissions", className="card-title"), 
@@ -108,8 +110,10 @@ layout = html.Div([
                             value=basin_names[0],
                         ) 
                     ),
-                ]))
-            ]),
+                ], color="rgb(210,73,42,0.9)", inverse=True))
+            ], style={
+                'textAlign': 'center',
+            }), 
         dbc.Row(children=
             [
                 dbc.Col(html.Div([
@@ -126,11 +130,11 @@ layout = html.Div([
                 ])
             ])
             
-        ])   
+        ], style={
+                'textAlign': 'right',
+            })   
     ], fluid=True)
 ])
-
-
 '''
 Creating callback functions for bar graphs
 '''
