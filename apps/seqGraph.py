@@ -24,8 +24,6 @@ import os
 
 dfs = load_dfs(os.path.join("Data", "lightweight_config.json"))
 basins = dfs['Sedimentary Basins']
-basin_names = basins.Name.unique()
-basin_names.sort()
 
 
 def map():
@@ -57,7 +55,7 @@ def map():
 
 def plants_per_basin():
     df_basin = dfs['Sedimentary Basins']
-    df_emission = dfs['EPA Power Plants']
+    df_emission = dfs['EPA Power Plant Emissions']
 
     exp_basin = df_basin.explode()
 
@@ -94,6 +92,8 @@ def plants_per_basin():
     return df
 
 df = plants_per_basin()
+basin_names = df.name.unique()
+basin_names.sort()
 
 def scatterboiz():
     fig = px.scatter(df, x='emissions', y='storage', 

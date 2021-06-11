@@ -8,22 +8,36 @@
             "latcol": "N/A",
             "loncol": "N/A",
             "attributes_to_display": [
-                "PltTectSet", "Era", "BasinType", "Name", "Storage"
+                "PltTectSet", "Era", "BasinType", "Name", "TA_Storage"
             ]
         },
         {
-            "name": "EPA Power Plants",
-            "file": "emission_05-24-2021.csv",
+            "name": "EPA Power Plant Facility Info",
+            "file": "facility_06-10-2021_170833518.csv",
+            "file_type": "csv",
+            "latcol": "Facility Latitude",
+            "loncol": "Facility Longitude",
+            "attributes_to_display":  [ 
+                "State", "Facility Name", "Facility ID (ORISPL)", "Unit ID",
+                "Year", "Source Category", "Owner", "Operator", "Unit Type",
+                "Fuel Type (Primary)", "Fuel Type (Secondary)",
+                "Commercial Operation Date", "Operating Status", "Status",
+                "Max Hourly HI Rate (MMBtu/hr)"
+            ]
+        },
+        {
+            "name": "EPA Power Plant Emissions",
+            "file": "emission_06-10-2021_164726740.csv",
             "file_type": "csv",
             "latcol": "Facility Latitude",
             "loncol": "Facility Longitude",
             "attributes_to_display":  [ 
                 "State", "Facility Name", "Facility ID (ORISPL)", "Year", 
-                "CO2 (short tons)" 
+                "CO2 (Mt)", "Gross Load (MW-h)", "Heat Input (MMBtu)"
             ]
         },
         {
-            "name": "EIA Power Plants",
+            "name": "EIA Power Plant Info",
             "file": "PowerPlants_US_EIA.zip",
             "file_type": "shp",
             "latcol": "N/A",
