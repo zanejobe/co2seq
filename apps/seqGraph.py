@@ -118,7 +118,15 @@ layout = html.Div([
                 dbc.Col(html.Div([
                     dcc.Graph(id="bar-graph"),
                 ]))
-            ]),    
+            ]), 
+        dbc.Row([
+            dbc.Card([
+                dbc.CardBody([
+                    dcc.Link('About', href='/apps/about')
+                ])
+            ])
+            
+        ])   
     ], fluid=True)
 ])
 
@@ -132,6 +140,6 @@ Creating callback functions for bar graphs
 def barboiz(name):
     mask = df[df["name"] == name]
     fig = px.bar(mask, x="name", y=["emissions", "storage"], 
-            barmode='group', height=400
+            barmode='group'
             )
     return fig
