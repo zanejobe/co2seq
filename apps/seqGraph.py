@@ -27,7 +27,7 @@ basins = dfs['Sedimentary Basins']
 
 
 def map():
-    traces = get_traces_from_dfs(os.path.join("Data", "lightweight_config.json"), dfs)
+    traces = get_traces_from_dfs(os.path.join("Data", "config.json"), dfs)
 
     fig = go.Figure()
     
