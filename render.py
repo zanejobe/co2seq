@@ -25,8 +25,12 @@ def load_dfs(config_path, data_dir="Data"):
                 Returns a dictionary of dataframes
     '''
     dfs = {}
-    f = open(config_path)
-    config = json.load(f)
+    try:
+        f = open(config_path)
+        config = json.load(f)
+    except:
+        raise Exception(f"Error loading config file from {config_path}")
+
     for conf in config['dataframes']:
         df_file = os.path.join(data_dir, conf["file"])
         try:
@@ -42,20 +46,31 @@ def load_dfs(config_path, data_dir="Data"):
     return dfs
 
 
-def get_traces_from_dfs(dfs):
+def get_traces_from_dfs(config_path, dfs):
     '''
         Turn a dictionary of dataframes into a list of ScatterMapBox traces
         to be added to a plotly figure
 
         Args:
             {name:dfs}::{str:geopandas.GeoDataFrame}
-                A dictionary of GeoPandas dataframes (created from load_dfs())
+                A dictionary of GeoPandas dataframes created from load_dfs()
+            config_path::str
+                Path to the data configuration JSON file
 
         Returns:
             traces::[plotly.graph_objects.Scattermapbox]
     '''
     traces = []
-    for name, df in dfs.items():
+    try:
+        f = open(config_path)
+        config = json.load(f)
+    except:
+        raise Exception(f"Error loading config file from {config_path}")
+
+    for conf in config["dataframes"]:
+        name = conf["name"]
+        df = dfs[name]
+
         key = get_shapley_key(df.geometry[0])
         if key == "":
             raise Exception(f"The geometry in {name} is not supported")
@@ -66,6 +81,7 @@ def get_traces_from_dfs(dfs):
                                        hovertext=hover_labels,
                                        visible="legendonly",
                                        lon=lons, lat=lats,
+                                       #marker_type=conf["marker"],
                                        mode=plotly_args[key]["mode"],
                                        fill=plotly_args[key]["fill"]))
     return traces
