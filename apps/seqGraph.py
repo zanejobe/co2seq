@@ -23,7 +23,7 @@ from render import load_dfs, get_traces_from_dfs
 import os
 
 dfs = load_dfs(os.path.join("Data", "config.json"))
-basins = dfs['Sedimentary Basins 2012']
+basins = dfs['USGS Sedimentary Basins 2012']
 
 
 def map():
