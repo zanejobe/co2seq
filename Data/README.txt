@@ -1,12 +1,8 @@
 References:
 GOMSandsBOEM - https://www.data.boem.gov/Main/GandG.aspx
-WellsBOEM - https://www.data.boem.gov/Main/Production.aspx
 WellsNETL - https://edx.netl.doe.gov/geocube/#collections/offshore
 BoreholesBOEM - https://www.data.boem.gov/Main/Well.aspx
 PlannedWellsBOEM - https://www.data.boem.gov/Main/Plans.aspx
-
-Brine stuff:
-https://www.beg.utexas.edu/gccc/research/brine-main
 
  This contains stuff like spud and td dates of wells:
 https://www.data.bsee.gov/Well/API/Default.aspx

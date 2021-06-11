@@ -22,7 +22,7 @@ from app import app
 from render import load_dfs, get_traces_from_dfs
 import os
 
-dfs = load_dfs(os.path.join("Data", "lightweight_config.json"))
+dfs = load_dfs(os.path.join("Data", "config.json"))
 basins = dfs['Sedimentary Basins']
 
 
