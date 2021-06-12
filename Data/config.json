@@ -17,7 +17,7 @@
             "file_type": "csv",
             "latcol": "Facility Latitude",
             "loncol": "Facility Longitude",
-            "attributes_to_display":  [ 
+            "attributes_to_display":  [
                 "State", "Facility Name", "Facility ID (ORISPL)", "Unit ID",
                 "Year", "Source Category", "Owner", "Operator", "Unit Type",
                 "Fuel Type (Primary)", "Fuel Type (Secondary)",
@@ -31,8 +31,8 @@
             "file_type": "csv",
             "latcol": "Facility Latitude",
             "loncol": "Facility Longitude",
-            "attributes_to_display":  [ 
-                "State", "Facility Name", "Facility ID (ORISPL)", "Year", 
+            "attributes_to_display":  [
+                "State", "Facility Name", "Facility ID (ORISPL)", "Year",
                 "CO2 (Mt)", "Gross Load (MW-h)", "Heat Input (MMBtu)"
             ]
         },
@@ -42,10 +42,10 @@
             "file_type": "shp",
             "latcol": "N/A",
             "loncol": "N/A",
-            "attributes_to_display": [ 
+            "attributes_to_display": [
                 "Plant_Code", "Plant_Name", "Utility_Name", "Utility_ID",
-                "sector_nam", "City", "County", "StateName", "Zip", 
-                "Street_Add", "PrimSource", "Total_MW", "source_des", 
+                "sector_nam", "City", "County", "StateName", "Zip",
+                "Street_Add", "PrimSource", "Total_MW", "source_des",
                 "tech_desc"
             ]
         },
@@ -76,13 +76,13 @@
             "latcol": "LAT",
             "loncol": "LONG_",
             "attributes_to_display": [
-                "SN_FORMSAND", "SAND_NAME", "SDDATE","WELLAPI", 
-                "BOEM_FIELD", "FDDATE", "FDYEAR", "SAND", "PLAY_NAME", 
-                "CHRONOZONE", "PLAY_TYPE", "SD_TYPE", "WDEP", 
-                "Original_Oil", "Original_Gas", "Original BOE", "Cum_Oil", 
-                "Cum_Gas", "Cum BOE", "Oil_Reserves","Gas_Reserves", 
-                "BOE Reserves", "THK", "OTHK", "GTHK", "RESTYP", 
-                "POROSITY", "SW", "PERMEABILITY", "GOR", 
+                "SN_FORMSAND", "SAND_NAME", "SDDATE","WELLAPI",
+                "BOEM_FIELD", "FDDATE", "FDYEAR", "SAND", "PLAY_NAME",
+                "CHRONOZONE", "PLAY_TYPE", "SD_TYPE", "WDEP",
+                "Original_Oil", "Original_Gas", "Original BOE", "Cum_Oil",
+                "Cum_Gas", "Cum BOE", "Oil_Reserves","Gas_Reserves",
+                "BOE Reserves", "THK", "OTHK", "GTHK", "RESTYP",
+                "POROSITY", "SW", "PERMEABILITY", "GOR",
                 "API", "OIP"
             ]
         },
@@ -93,9 +93,9 @@
             "latcol": "LAT",
             "loncol": "LONG",
             "attributes_to_display": [
-                "PLAN_CTRL_CD", "PLAN_CTRL_NUM", "PLAN_SITE_TYPE", 
+                "PLAN_CTRL_CD", "PLAN_CTRL_NUM", "PLAN_SITE_TYPE",
                 "PLAN_SITE_NAME", "SITE_CANCEL_DT", "PLAN_FNL_ACTN_CD",
-                "PLAN_FNL_ACTN_DT", "SURF_AREA_CODE", "SURF_BLOCK_NUM", 
+                "PLAN_FNL_ACTN_DT", "SURF_AREA_CODE", "SURF_BLOCK_NUM",
                 "PLAN_TYPE_CODE", "WATER_DEPTH"
             ]
         },
@@ -105,10 +105,10 @@
             "file_type": "shp",
             "latcol": "N/A",
             "loncol": "N/A",
-            "attributes_to_display": [ 
-                "STR_NUMBER", "COMPLEX_ID", "STR_NAME", 
+            "attributes_to_display": [
+                "STR_NUMBER", "COMPLEX_ID", "STR_NAME",
                 "INSTALL_DA", "REMOVAL_DA"
-                
+
             ]
         },
         {
@@ -118,7 +118,7 @@
             "latcol": "bh_sfclat",
             "loncol": "bh_sfclon",
             "attributes_to_display": [
-                "bh_api", "bh_wellname", "bh_opernum", "bh_spuddat", 
+                "bh_api", "bh_wellname", "bh_opernum", "bh_spuddat",
                 "bh_mdft", "bh_tddate", "bh_typecod", "bh_waterde"
             ]
         },
@@ -128,7 +128,7 @@
             "file_type": "shp",
             "latcol": "N/A",
             "loncol": "N/A",
-            "attributes_to_display": [ 
+            "attributes_to_display": [
                 "SDE_COMPAN", "PROD_CODE", "STATUS_COD", "PPL_SIZE_C"
             ]
         },
@@ -138,7 +138,7 @@
             "file_type": "shp",
             "latcol": "N/A",
             "loncol": "N/A",
-            "attributes_to_display": [ 
+            "attributes_to_display": [
                 "Opername", "Pipename"
             ]
         },
@@ -148,7 +148,7 @@
             "file_type": "shp",
             "latcol": "N/A",
             "loncol": "N/A",
-            "attributes_to_display": [ 
+            "attributes_to_display": [
                 "Opername", "Pipename"
             ]
         },
@@ -158,7 +158,7 @@
             "file_type": "shp",
             "latcol": "N/A",
             "loncol": "N/A",
-            "attributes_to_display": [ 
+            "attributes_to_display": [
                 "TYPEPIPE", "Operator", "Status"
             ]
         },
@@ -168,7 +168,7 @@
             "file_type": "shp",
             "latcol": "N/A",
             "loncol": "N/A",
-            "attributes_to_display": [ 
+            "attributes_to_display": [
                 "Opername", "Pipename"
             ]
         },
@@ -179,7 +179,7 @@
             "latcol": "N/A",
             "loncol": "N/A",
             "attributes_to_display": [
-                "SURVEY_ID", "CONTRIBUTOR", "DATA_TYPE", 
+                "SURVEY_ID", "CONTRIBUTOR", "DATA_TYPE",
                 "YEAR", "PLAN_AREAS", "IDENTIFIERS"
             ]
         },
@@ -190,8 +190,8 @@
             "latcol": "N/A",
             "loncol": "N/A",
             "attributes_to_display": [
-                "SURVEY_ID", "CONTRIBUTOR", "DATA_TYPE", 
-                "YEAR", "PLAN_AREAS", "IDENTIFIERS"   
+                "SURVEY_ID", "CONTRIBUTOR", "DATA_TYPE",
+                "YEAR", "PLAN_AREAS", "IDENTIFIERS"
             ]
         }
     ]

@@ -23,35 +23,31 @@ from render import load_dfs, get_traces_from_dfs
 import os
 
 dfs = load_dfs(os.path.join("Data", "config.json"))
+traces = get_traces_from_dfs(os.path.join("Data", "config.json"), dfs)
 basins = dfs['Sedimentary Basins 2012']
 
+fig = go.Figure()
 
-def map():
-    traces = get_traces_from_dfs(os.path.join("Data", "config.json"), dfs)
+for trace in traces:
+    fig.add_trace(trace)
 
-    fig = go.Figure()
-    
-    for trace in traces:
-        fig.add_trace(trace)
+fig.update_layout(mapbox_style="open-street-map")
+fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
+fig.update_layout(height=900)
+fig.update_mapboxes(center=go.layout.mapbox.Center(lat=40, lon=-99), zoom=3)
 
-    fig.update_layout(mapbox_style="open-street-map")
-    fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
-    fig.update_layout(autosize=True)
-    fig.update_mapboxes(center=go.layout.mapbox.Center(lat=40, lon=-99), zoom=3)
-
-    fig.update_layout(
-        legend=dict(
-            x=1,
-            y=0.7,
-            traceorder="normal",
-            font=dict(
-                family="Georgia",
-                size=18,
-                color="#21314D"
-            )
+fig.update_layout(
+    legend=dict(
+        x=1,
+        y=0.7,
+        traceorder="normal",
+        font=dict(
+            family="Georgia",
+            size=18,
+            color="#21314D"
         )
     )
-    return fig
+)
 
 
 df = pd.read_csv("Data/plants_per_basin.csv")
@@ -88,8 +84,13 @@ layout = html.Div([
                 ])),
             ]),
         dbc.Row([
-            dcc.Graph(figure=map(), style={"height" : "40%", "width" : "90%"})
-            ]),
+            dcc.Loading(
+                id="loading-1",
+                type="default",
+                style={"height": "900", "width": "175vh"},
+                children=dcc.Graph(id="map", style={"height": "900", "width": "175vh"})
+            ),
+        ], id="map_row", justify="center"),
         dbc.Row(children=
             [
                 dbc.Col(dbc.Card([
@@ -134,4 +135,10 @@ def barboiz(name):
     fig = px.bar(mask, x="name", y=["emissions", "storage"], 
             barmode='group', height=400
             )
+    return fig
+
+@app.callback(
+    Output("map", "figure"),
+    [Input("map_row", "id")])
+def create_map(_):
     return fig
