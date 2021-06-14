@@ -46,15 +46,17 @@ basin_names = df.name.unique()
 basin_names.sort()
 
 def scatterboiz():
-    fig = px.scatter(df, x='emissions', y='storage', 
-            hover_data=['name', 'storage', 'emissions'], 
+    #df["Years to fill basin"] = df.apply(lambda row: row["storage"]/row["emissions"])
+    fig = px.scatter(df, x='emissions', y='storage',
+            hover_data=['name', 'storage', 'emissions'],
+            #size='Years to fill basin',
             log_x=True, log_y=True, 
             labels={
                 "emissions" : "Emissions (Mt)",
                 "storage"   : "Storage (Mt)"
             })
-    fig.update_layout(yaxis={"tickmode": "linear"},
-                      xaxis={"tickmode": "linear"})
+    fig.update_layout(yaxis={"tickmode": "linear", "showgrid": False},
+                      xaxis={"tickmode": "linear", "showgrid": False})
     return fig
 
 '''
@@ -139,7 +141,8 @@ Creating callback functions for bar graphs
 def barboiz(name):
     mask = df[df["name"] == name]
     fig = px.bar(mask, x="name", y=["emissions", "storage"], barmode='group', log_y=True)
-    fig.update_layout(yaxis={"tickmode": "linear"})
+    fig.update_layout(yaxis={"tickmode": "linear", "showgrid": False, "title": "CO<sub>2</sub> (Mt)" },
+                      xaxis={"title": ""})
     return fig
 
 @app.callback(
