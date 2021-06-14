@@ -46,10 +46,10 @@ basin_names = df.name.unique()
 basin_names.sort()
 
 def scatterboiz():
-    #df["Years to fill basin"] = df.apply(lambda row: row["storage"]/row["emissions"])
+    df["Years to fill basin"] = (df.apply(lambda x: round(x.storage/x.emissions, 2), axis=1))
     fig = px.scatter(df, x='emissions', y='storage',
-            hover_data=['name', 'storage', 'emissions'],
-            #size='Years to fill basin',
+            hover_data=['name', 'storage', 'emissions', 'Years to fill basin'],
+            size='Years to fill basin',
             log_x=True, log_y=True, 
             labels={
                 "emissions" : "Emissions (Mt)",
@@ -74,7 +74,7 @@ layout = html.Div([
         dbc.Row([
             dbc.Col(dbc.Card(
                 [
-                    dbc.CardBody(html.H3("US Map of Sequestration Features", className="align-self-center"))
+                    dbc.CardBody(html.H3("Interactive Map of Carbon Storage Potential and Emissions", className="align-self-center"))
                      
                 ], color="rgb(33,49,77,0.9)", inverse=True)),
             ], style={
@@ -114,10 +114,10 @@ layout = html.Div([
         dbc.Row(children=
             [
                 dbc.Col(html.Div([
-                    dcc.Graph(figure=scatterboiz()),
+                    dcc.Graph(figure=scatterboiz(), responsive=True),
                 ])),
                 dbc.Col(html.Div([
-                    dcc.Graph(id="bar-graph"),
+                    dcc.Graph(id="bar-graph", responsive=True),
                 ]))
             ]), 
         dbc.Row([
