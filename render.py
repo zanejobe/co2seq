@@ -78,7 +78,7 @@ def get_traces_from_dfs(config_path, dfs):
         lats, lons, hover_labels = lat_lon_lists_from_df(df)
         # TODO: specify line thicknesses, point sizes, and colors
 
-        if name == "Sedimentary Basins 2012":
+        if name == "USGS Sedimentary Basins 2012":
             traces.append(go.Scattermapbox(name=name,
                                        hovertext=hover_labels,
                                        visible="legendonly",

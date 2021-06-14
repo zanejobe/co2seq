@@ -29,8 +29,8 @@ fig.update_mapboxes(center=go.layout.mapbox.Center(lat=40, lon=-99), zoom=3)
 
 fig.update_layout(
     legend=dict(
-        # x=1,
-        # y=0.7,
+        x=1,
+        y=0.9,
         traceorder="normal",
         font=dict(
             family="Georgia",
@@ -53,6 +53,8 @@ def scatterboiz():
                 "emissions" : "Emissions (Mt)",
                 "storage"   : "Storage (Mt)"
             })
+    fig.update_layout(yaxis={"tickmode": "linear"},
+                      xaxis={"tickmode": "linear"})
     return fig
 
 '''
@@ -100,6 +102,7 @@ layout = html.Div([
                             id="dropdown",
                             options=[{"label": x, "value": x} for x in basin_names],
                             value=basin_names[0],
+                            style={'color': 'black'}
                         ) 
                     ),
                 ], color="rgb(210,73,42,0.9)", inverse=True))
@@ -135,9 +138,8 @@ Creating callback functions for bar graphs
     [Input("dropdown", "value")])
 def barboiz(name):
     mask = df[df["name"] == name]
-    fig = px.bar(mask, x="name", y=["emissions", "storage"], 
-            barmode='group'
-            )
+    fig = px.bar(mask, x="name", y=["emissions", "storage"], barmode='group', log_y=True)
+    fig.update_layout(yaxis={"tickmode": "linear"})
     return fig
 
 @app.callback(
