@@ -2,7 +2,7 @@
 {
     "dataframes": [
         {
-            "name": "Sedimentary Basins 2012",
+            "name": "USGS Sedimentary Basins 2012",
             "file": "NewSedimentary_BasinsUS.zip",
             "file_type": "shp",
             "latcol": "N/A",

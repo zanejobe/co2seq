@@ -1,22 +1,11 @@
-
 import plotly.graph_objects as go
 import plotly.express as px
-from plotly.offline import plot
-
-import dash
 import dash_core_components as dcc
 import dash_html_components as html
 import dash_bootstrap_components as dbc
-from dash.dependencies import Input, Output, State
-import geopandas as gpd
 import pandas as pd
 
-import dash_leaflet as dl
-import dash_leaflet.express as dlx
-from dash import Dash
 from dash.dependencies import Output, Input
-from dash_extensions.javascript import arrow_function
-from shapely.geometry import Point, Polygon
 
 from app import app
 from render import load_dfs, get_traces_from_dfs
@@ -24,7 +13,7 @@ import os
 
 dfs = load_dfs(os.path.join("Data", "config.json"))
 traces = get_traces_from_dfs(os.path.join("Data", "config.json"), dfs)
-basins = dfs['Sedimentary Basins 2012']
+basins = dfs['USGS Sedimentary Basins 2012']
 
 fig = go.Figure()
 
@@ -33,13 +22,15 @@ for trace in traces:
 
 fig.update_layout(mapbox_style="open-street-map")
 fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
-fig.update_layout(height=900)
+
+map_height = 600
+fig.update_layout(height=map_height)
 fig.update_mapboxes(center=go.layout.mapbox.Center(lat=40, lon=-99), zoom=3)
 
 fig.update_layout(
     legend=dict(
-        x=1,
-        y=0.7,
+        # x=1,
+        # y=0.7,
         traceorder="normal",
         font=dict(
             family="Georgia",
@@ -79,16 +70,18 @@ layout = html.Div([
         dbc.Row([
             dbc.Col(dbc.Card(
                 [
-                    dbc.CardBody(html.H3("US Map of Sequestration Features", className="card-title"))
+                    dbc.CardBody(html.H3("US Map of Sequestration Features", className="align-self-center"))
                      
-                ])),
-            ]),
+                ], color="rgb(33,49,77,0.9)", inverse=True)),
+            ], style={
+                'textAlign': 'center',
+            }),
         dbc.Row([
             dcc.Loading(
                 id="loading-1",
                 type="default",
-                style={"height": "900", "width": "175vh"},
-                children=dcc.Graph(id="map", style={"height": "900", "width": "175vh"})
+                style={"height": f"{map_height}", "width": "175vh"},
+                children=dcc.Graph(id="map", style={"height": f"{map_height}", "width": "175vh"})
             ),
         ], id="map_row", justify="center"),
         dbc.Row(children=
@@ -97,7 +90,7 @@ layout = html.Div([
                     dbc.CardBody([
                         html.H4("Basin Sequestration Potential", className="card-title"), 
                         html.P("Scatterplot with log scale applied to x and y axis displaying all basins with their total storage and emission data.", className="card-text")]),
-                ])),
+                ], color="rgb(210,73,42,0.9)", inverse=True)),
                 dbc.Col(dbc.Card([
                     dbc.CardBody([
                         html.H4("Basin Storage v. Emissions", className="card-title"), 
@@ -109,8 +102,10 @@ layout = html.Div([
                             value=basin_names[0],
                         ) 
                     ),
-                ]))
-            ]),
+                ], color="rgb(210,73,42,0.9)", inverse=True))
+            ], style={
+                'textAlign': 'center',
+            }), 
         dbc.Row(children=
             [
                 dbc.Col(html.Div([
@@ -119,11 +114,19 @@ layout = html.Div([
                 dbc.Col(html.Div([
                     dcc.Graph(id="bar-graph"),
                 ]))
-            ]),    
+            ]), 
+        dbc.Row([
+            dbc.Card([
+                dbc.CardBody([
+                    dcc.Link('About', href='/apps/about')
+                ])
+            ])
+            
+        ], style={
+                'textAlign': 'right',
+            })   
     ], fluid=True)
 ])
-
-
 '''
 Creating callback functions for bar graphs
 '''
@@ -133,7 +136,7 @@ Creating callback functions for bar graphs
 def barboiz(name):
     mask = df[df["name"] == name]
     fig = px.bar(mask, x="name", y=["emissions", "storage"], 
-            barmode='group', height=400
+            barmode='group'
             )
     return fig
 
