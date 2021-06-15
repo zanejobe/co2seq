@@ -65,8 +65,9 @@ Layout for Page 1 hosts map object and general overview
 layout = html.Div([
     dbc.Container([
         dbc.Row([
-            dbc.Col(html.H1("Carbon Sequestration Dashboard"), className="mb-2")
-        ]),
+            dbc.Col(html.H1("Carbon Sequestration Dashboard"), className="mb-2"),
+            dbc.Col(dcc.Link('About', href='/apps/about', style={"textAlign": "right"}), style={"textAlign": "right"})
+        ], style={"margin-top": "6px"}),
         dbc.Row([
             dbc.Col(html.H6(children='A interactive dashboard to gain an overview of geological features relevant to the carbon sequestration process.'), className="mb-4")
         ]),
@@ -109,7 +110,7 @@ layout = html.Div([
                     ),
                 ], color="rgb(210,73,42,0.9)", inverse=True))
             ], style={
-                'textAlign': 'center',
+                'textAlign': 'center', 'margin-top': '10px'
             }), 
         dbc.Row(children=
             [
@@ -119,17 +120,7 @@ layout = html.Div([
                 dbc.Col(html.Div([
                     dcc.Graph(id="bar-graph", responsive=True),
                 ]))
-            ]), 
-        dbc.Row([
-            dbc.Card([
-                dbc.CardBody([
-                    dcc.Link('About', href='/apps/about')
-                ])
             ])
-            
-        ], style={
-                'textAlign': 'right',
-            })   
     ], fluid=True)
 ])
 '''
