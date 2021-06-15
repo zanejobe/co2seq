@@ -13,36 +13,34 @@ Also, Nice overviews of CCS
 - https://www.netl.doe.gov/sites/default/files/netl-file/co2_eor_primer.pdf
 - http://energy.mit.edu/publication/lessons-learned-from-ccs-demonstration-and-large-pilot-projects/  
 
-# suggested schedule
-## Week 1 May 17-21
-- Meet and greet May 17 (monday) with Zane and Brandon
-  - discuss goals and end product
-  - WEBSITE EXAMPLE atlas of economic complexity
-- figure out repo, front end language/webapp, back-end functions
-- basic dataset collection (and future-proofing with auto-updates through APIs)
+# Interactive Map of Carbon Storage Potential and Emissions
 
-## Week 2 May 24-28
-- create web maps of CO2 sources and CCS basin locations
-- GOM focus
-  - contact Khushboo!!
-  - public data for wells, pore volume, production history, decline curves, pressure data, etc.
-  - state website stuff for nearshore?
-  - BOEM well and production data
-  - BOEM bathy map import to web map?
-  - CO2 sources and pipeline data
-  - analyze production history for potential high-graded sites
+This project is an interactive dashboard that uses public datasets relevant fo a co2 sink and source information from various
+agencies for users to explore. The data is contained in the Data folder and described in config.json. Each dataset is imposed on 
+a map of the US and Gulf of Mexico that the user is able to explore and view summary information for. Links to all data sources 
+can be found below.   
 
-## Week 3 May 31 – June4
-- Permian focus
-  - TXRRC data for CO2 injection for old fields
-  - find literature about CO2 injection as EOR
-  - Oxy partnership?
-  - New Mexico data?
-  - core data - link to TTU, BEG, etc.
+The project is a built as a Dash app by Plotly, and uses the associated libraries to represent the data. All graphing is handeled in apps/seqGraph.py. And data is 
+processed in utils.py and render.py.  
 
-## Week 4 June 7-11
-- finish back-end tools and functions
-- build out web app and data-viz stuff
+# To Install
 
-## Week 5 June 14-18
-comment code, clean up everything, build presentation, and deploy!
+-$ git clone $repo  
+-$ poetry install (for poetry venv), for other venvs see pyproject.toml for necessary packages 
+
+For local host:  
+
+-in index.py set line 29 to:
+
+-if __name__ == '__main__':  
+    app.run_server(debug=False, use_reloader=False)    
+    
+in project folder:  
+
+-$ python index.py  
+
+# Team
+The project is a headed by the Colorado School of Mines Geology Department  
+
+Team lead: Professor Zane Jobe  
+Contributers: Grant Falkner, Matt Plumb, Ryan Armstrong, Patrick Schassberger  
