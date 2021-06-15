@@ -25,19 +25,19 @@ processed in utils.py and render.py.
 
 # To Install
 
--$ git clone $repo  
--$ poetry install (for poetry venv), for other venvs see pyproject.toml for necessary packages 
+    $ git clone $repo  
+    $ poetry install (for poetry venv), for other venvs see pyproject.toml for necessary packages 
 
 For local host:  
 
 -in index.py set line 29 to:
 
--if __name__ == '__main__':  
-    app.run_server(debug=False, use_reloader=False)    
+    if __name__ == '__main__':  
+        app.run_server(debug=False, use_reloader=False)    
     
 in project folder:  
 
--$ python index.py  
+    $ python index.py  
 
 # Team
 The project is a headed by the Colorado School of Mines Geology Department  
