@@ -52,8 +52,8 @@ def scatterboiz():
             size='Years to fill basin',
             log_x=True, log_y=True, 
             labels={
-                "emissions" : "Emissions (Mt)",
-                "storage"   : "Storage (Mt)"
+                "emissions" : "2020 Emissions (Mt)",
+                "storage"   : "Total Storage (Mt)"
             })
     fig.update_layout(yaxis={"tickmode": "linear", "showgrid": False},
                       xaxis={"tickmode": "linear", "showgrid": False})
@@ -98,7 +98,7 @@ layout = html.Div([
                 dbc.Col(dbc.Card([
                     dbc.CardBody([
                         html.H4("Basin Storage v. Emissions", className="card-title"), 
-                        html.P("Bar Chart per selected basin, displaying total Storage vs. Emission data.", className="card-text")]),
+                        html.P("Bar Chart per selected basin, displaying total Storage vs. Emission data. Log scale applied to y axis.", className="card-text")]),
                     dbc.CardFooter(
                         dcc.Dropdown(
                             id="dropdown",

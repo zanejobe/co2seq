@@ -48,6 +48,9 @@ def get_hover_string_list(df, hover_columns):
         s = ""
         for col in hover_columns:
             if col in row:
-                s += f"{col} = {row[col]}<br>"
+                if col == "TA_Storage":
+                    s += f"CO2 Storage (Mt) = {row[col]}<br>"
+                else:   
+                    s += f"{col} = {row[col]}<br>"
         result.append(s)
     return result
