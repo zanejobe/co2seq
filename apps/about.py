@@ -13,7 +13,19 @@ from app import app
 layout = html.Div([
     dbc.Container([
         dbc.Row([
-            dbc.Col(html.H1("About"), className="mb-2")
+            html.H1("About Page"), 
+        ]),
+        dbc.Row([
+            html.H3("Project Overview"),
+            html.H6("This project is an interactive dashboard that uses public datasets relevant fo a co2 sink and source information from various agencies for users to explore. The data is contained in the Data folder and described in config.json. Each dataset is imposed on a map of the US and Gulf of Mexico that the user is able to explore and view summary information for. Links to all data sources can be found below. The project is a built as a Dash app by Plotly, and uses the associated libraries to represent the data. All graphing is handeled in apps/seqGraph.py. And data is processed in utils.py and render.py."),
+        ]),
+        dbc.Row([
+            dcc.Markdown('''
+                ## Desinged by Colorado School of Mines  
+                Team Lead: Professor Zane Jobe zanejobe@mines.edu  
+                Contributers: Grant Falkner, Matt Plumb, Ryan Armstrong, Patrick Schassberger  
+                '''
+            )
         ]),
         dbc.Row([
             dcc.Markdown(
@@ -35,6 +47,9 @@ Every dataset used contains non-proprietary data from U.S. government agencies:
 
         '''
             )
+        ]),  
+        dbc.Row([
+            html.H6("Last update: 05/15/2021"),
         ]),
         html.Br(),
         dcc.Link('Home', href='/'),
