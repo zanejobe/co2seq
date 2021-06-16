@@ -17,21 +17,35 @@ layout = html.Div([
         ]),
         dbc.Row([
             html.H3("Project Overview"),
-            html.H6("This project is an interactive dashboard that uses public datasets relevant fo a co2 sink and source information from various agencies for users to explore. The data is contained in the Data folder and described in config.json. Each dataset is imposed on a map of the US and Gulf of Mexico that the user is able to explore and view summary information for. Links to all data sources can be found below. The project is a built as a Dash app by Plotly, and uses the associated libraries to represent the data. All graphing is handeled in apps/seqGraph.py. And data is processed in utils.py and render.py."),
+            html.H6("This project is an interactive dashboard that uses public datasets relevant to CO2 sink and source information. Each dataset is imposed on a map of the U.S. that the user is able to explore and view summary information for. Links to all data sources can be found below."),
+        ]),
+        dbc.Row([
+            html.H6("Designed by faculty and students at the Colorado School of Mines as part of a computer science field session project"),
+
+        ]),
+        dbc.Row([
+            html.H6("Team Lead: Professor Zane Jobe zanejobe@mines.edu"),
+
+        ]),
+        dbc.Row([
+            html.H6("Contributors: Grant Falkner, Matt Plumb, Ryan Armstrong, Patrick Schassberger")
+        ]),
+        dbc.Row([
+            html.H3("Disclaimers")
         ]),
         dbc.Row([
             dcc.Markdown('''
-                ## Desinged by Colorado School of Mines  
-                Team Lead: Professor Zane Jobe zanejobe@mines.edu  
-                Contributers: Grant Falkner, Matt Plumb, Ryan Armstrong, Patrick Schassberger  
-                '''
-            )
+            - All numeric axes are logarithmicly scaled for readability
+            - The study areas taken from the USGS basin storage data and actual geological basins do not entirely line up. As a result, some basins do not have storage data and are excluded from the two graphs. Storage values also may not be entirely accurate due to the difference in area.
+            
+            ''')
+        ]),
+        dbc.Row([
+            html.H3("References")
         ]),
         dbc.Row([
             dcc.Markdown(
         '''
-        
-## References
 Every dataset used contains non-proprietary data from U.S. government agencies:
 
 - USGS Sedimentary Basins - https://pubs.usgs.gov/of/2012/1111/
@@ -49,7 +63,7 @@ Every dataset used contains non-proprietary data from U.S. government agencies:
             )
         ]),  
         dbc.Row([
-            html.H6("Last update: 05/15/2021"),
+            html.H6("Last update: 06/16/2021"),
         ]),
         html.Br(),
         dcc.Link('Home', href='/'),
