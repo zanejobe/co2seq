@@ -5,6 +5,7 @@ import dash_html_components as html
 import dash_bootstrap_components as dbc
 import pandas as pd
 
+import dash
 from dash.dependencies import Output, Input
 
 from app import app
@@ -106,7 +107,7 @@ layout = html.Div([
                             options=[{"label": x, "value": x} for x in basin_names],
                             value=basin_names[0],
                             style={'color': 'black'}
-                        ) 
+                        ),
                     ),
                 ], color="rgb(210,73,42,0.9)", inverse=True))
             ], style={
@@ -127,14 +128,24 @@ layout = html.Div([
 Creating callback functions for bar graphs
 '''
 @app.callback(
-    Output("bar-graph", "figure"), 
-    [Input("dropdown", "value")])
-def barboiz(name):
+    [Output("bar-graph", "figure"), Output("dropdown", "value")],
+    [Input("dropdown", "value"), Input("map", "clickData")])
+def barboiz(name, clickData):
+    ctx = dash.callback_context
+    changed = ctx.triggered[0]['prop_id'].split('.')[0]
+
+    # If a user clicks on the map, parse the clickData from dcc.Graph into a name
+    if changed == "map" and clickData:
+        for frame in dfs.values():
+            row = frame[frame["hover"] == clickData["points"][0]["hovertext"]]
+            if not row.empty:
+                name = row["Name"].values[0]
+
     mask = df[df["name"] == name]
     fig = px.bar(mask, x="name", y=["emissions", "storage"], barmode='group', log_y=True)
     fig.update_layout(yaxis={"tickmode": "linear", "showgrid": False, "title": "CO<sub>2</sub> (Mt)" },
                       xaxis={"title": ""})
-    return fig
+    return fig, name
 
 @app.callback(
     Output("map", "figure"),
