@@ -31,7 +31,7 @@ layout = html.Div([
             html.H6("Contributors: Grant Falkner, Matt Plumb, Ryan Armstrong, Patrick Schassberger")
         ]),
         dbc.Row([
-            html.H3("Disclaimers")
+            html.H3("Notes Regarding Data")
         ]),
         dbc.Row([
             dcc.Markdown('''

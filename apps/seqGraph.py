@@ -54,7 +54,7 @@ def scatterboiz():
             log_x=True, log_y=True, 
             labels={
                 "emissions" : "2020 Emissions (Mt)",
-                "storage"   : "Total Storage (Mt)"
+                "storage"   : "Total Storage Potential (Mt)"
             })
     fig.update_layout(yaxis={"tickmode": "linear", "showgrid": False},
                       xaxis={"tickmode": "linear", "showgrid": False})
@@ -66,17 +66,19 @@ Layout for Page 1 hosts map object and general overview
 layout = html.Div([
     dbc.Container([
         dbc.Row([
-            dbc.Col(html.H1("Carbon Sequestration Dashboard"), className="mb-2"),
+            dbc.Col(html.H1("Dashboard for Carbon Capture, Utilization, and Storage (CCUS) Data"), className="mb-2"),
             dbc.Col(dcc.Link('About', href='/apps/about', style={"textAlign": "right"}), style={"textAlign": "right"})
         ], style={"margin-top": "6px"}),
         dbc.Row([
-            dbc.Col(html.H6(children='A interactive dashboard to gain an overview of geological features relevant to the carbon sequestration process.'), className="mb-4")
+            dbc.Col(html.H6(children='Colorado School of Mines'))
         ]),
-
+        dbc.Row([
+            dbc.Col(html.H6(children='An interactive dashboard to visualize geospatial data relevant to CCUS efforts in the United States. Select a dataset below to visualize it on the map, or scroll down to explore CCUS statistics grouped by basin.'), className="mb-4")
+        ]),
         dbc.Row([
             dbc.Col(dbc.Card(
                 [
-                    dbc.CardBody(html.H3("Interactive Map of Carbon Storage Potential and Emissions", className="align-self-center"))
+                    dbc.CardBody(html.H3("CCUS Map (select a dataset on the right to visualize it)", className="align-self-center"))
                      
                 ], color="rgb(33,49,77,0.9)", inverse=True)),
             ], style={
@@ -94,13 +96,14 @@ layout = html.Div([
             [
                 dbc.Col(dbc.Card([
                     dbc.CardBody([
-                        html.H4("Basin Sequestration Potential", className="card-title"), 
-                        html.P("Scatterplot with log scale applied to x and y axis displaying all basins with their total storage and emission data.", className="card-text")]),
+                        html.H4("CCUS Potential for US Basins", className="card-title"), 
+                        html.P("Each dot represents a US basin, where the annual emissions are derived from EPA data and the total carbon storage is derived from USGS data", className="card-text"),
+                        html.P("Bubble size represents the number of years of emissions to fill the storage")])
                 ], color="rgb(210,73,42,0.9)", inverse=True)),
                 dbc.Col(dbc.Card([
                     dbc.CardBody([
-                        html.H4("Basin Storage v. Emissions", className="card-title"), 
-                        html.P("Bar Chart per selected basin, displaying total Storage vs. Emission data. Log scale applied to y axis.", className="card-text")]),
+                        html.H4("Select a basin to compare emissions and storage", className="card-title"), 
+                        html.P("Bar chart compares annual emissions and total storage for a particular basin", className="card-text")]),
                     dbc.CardFooter(
                         dcc.Dropdown(
                             id="dropdown",
