@@ -22,6 +22,18 @@
             ]
         },
         {
+            "name": "NATCARB CO2 Storage Projects 2019",
+            "file": "CO2StorageProjects.zip",
+            "file_type": "shp",
+            "latcol": "N/A",
+            "loncol": "N/A",
+            "attributes_to_display": [
+                "Type", "PRTNRSHP", "Prov_Loca", "Form_Type", 
+                "Geo_CO2_In", "Geo_Depth", "Ter_Stor", "Projects",
+                "Geologic_P", "lead_organ"
+            ]
+        },
+        {
             "name": "EPA Power Plant Facility Info 2020",
             "file": "facility_06-10-2021_170833518.csv",
             "file_type": "csv",
