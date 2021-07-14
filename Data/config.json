@@ -18,7 +18,7 @@
             "latcol": "N/A",
             "loncol": "N/A",
             "attributes_to_display": [
-                "Shale_Play", "Lithology", "Basin", "Age_Shale"
+                "Shale_play", "Lithology", "Basin", "Age_shale"
             ]
         },
         {
