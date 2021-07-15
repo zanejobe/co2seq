@@ -4,6 +4,7 @@ import dash_core_components as dcc
 import dash_html_components as html
 import dash_bootstrap_components as dbc
 import pandas as pd
+import base64
 
 import dash
 from dash.dependencies import Output, Input
@@ -43,6 +44,7 @@ fig.update_layout(
 
 
 df = pd.read_csv("Data/plants_per_basin.csv")
+encoded_logo = base64.b64encode(open('CO-Mines-logo-stacked-4C.png', 'rb').read())
 basin_names = df.name.unique()
 basin_names.sort()
 
@@ -66,19 +68,23 @@ Layout for Page 1 hosts map object and general overview
 layout = html.Div([
     dbc.Container([
         dbc.Row([
-            dbc.Col(html.H1("Dashboard for Carbon Capture, Utilization, and Storage (CCUS) Data"), className="mb-2"),
-            dbc.Col(dcc.Link('About', href='/apps/about', style={"textAlign": "right"}), style={"textAlign": "right"})
-        ], style={"margin-top": "6px"}),
+            dbc.Col(html.Img(src='data:image/png;base64,{}'.format(encoded_logo.decode())), width=1),
+            dbc.Col(html.H1("Dashboard for Carbon Capture, Utilization, and Storage (CCUS) Data"), width=8, className="mb-2", 
+                style={'textAlign': 'left'}),
+            dbc.Col(dcc.Link('About', href='/apps/about', style={"textAlign": "right"}), width=3, style={"textAlign": "right"})
+        ], style={"margin-top": "6px", 'margin-bottom': '6px'}),
         dbc.Row([
-            dbc.Col(html.H6(children='Colorado School of Mines'))
-        ]),
-        dbc.Row([
-            dbc.Col(html.H6(children='An interactive dashboard to visualize geospatial data relevant to CCUS efforts in the United States. Select a dataset below to visualize it on the map, or scroll down to explore CCUS statistics grouped by basin.'), className="mb-4")
+            dbc.Col(html.H6(children='This interactive dashboard visualizes geospatial data relevant to CCUS efforts in the United States. Select a dataset below to display it on the map or scroll down to explore CCUS statistics by basin.'), className="mb-4")
         ]),
         dbc.Row([
             dbc.Col(dbc.Card(
                 [
-                    dbc.CardBody(html.H3("CCUS Map (select a dataset on the right to visualize it)", className="align-self-center"))
+                    dbc.CardBody(
+                        [
+                            html.H2("CCUS Map", className="align-self-center"),
+                            html.P("Select data from the right to show it on the map")
+                        ]
+                    )
                      
                 ], color="rgb(33,49,77,0.9)", inverse=True)),
             ], style={
