@@ -19,6 +19,7 @@
 - GOM specific https://edx.netl.doe.gov/offshore/ 
 
 # CO2 data
+- a few datasets https://co2datashare.org 
 - so much stuff here https://edx.netl.doe.gov/dataset/?groups=carbon-storage-open-database
 - https://www.netl.doe.gov/coal/carbon-storage/worldwide-ccs-database 
   - related https://edx.netl.doe.gov  
@@ -57,3 +58,6 @@ https://co2public.er.usgs.gov/viewer/
 - 3D seismic outlines from NAMSS https://walrus.wr.usgs.gov/namss/
 - Derived products from their analysis https://www.betterenergy.org/wp-content/uploads/2020/06/GPI_RegionalCO2Whitepaper.pdf
  
+ # Other nice websites
+ - https://ieaghg.org 
+ - 
