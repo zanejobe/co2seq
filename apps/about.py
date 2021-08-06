@@ -63,6 +63,9 @@ Every dataset used contains non-proprietary data from U.S. government agencies:
             )
         ]),  
         dbc.Row([
+            html.B("This site is currently in Beta. We would greatly appreciate any feedback. Please contact Professor Zane Jobe: zanejobe@mines.edu"),
+        ]),
+        dbc.Row([
             html.H6("Last update: 06/16/2021"),
         ]),
         html.Br(),
